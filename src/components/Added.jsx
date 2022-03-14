@@ -35,45 +35,42 @@ function Added() {
   const [addList, setAddList] = useState([]);
 
   const handleAddClick = (e) => {
-    console.log(datas[e.target.id].name);
     let addData = dummyData.filter(
       (a) => a.name === dummyData[e.target.id].name,
     );
     setDummyData(
       dummyData.filter((a) => a.name !== dummyData[e.target.id].name),
     );
-    console.log(datas);
-    setAddList([...addList, addData]);
+    setAddList([...addList, addData[0]]);
   };
 
   const handleDltClick = (e) => {
-    console.log(addList[e.target.id][0].name);
     let clickedData = addList.filter(
-      (a) => a[0].name === addList[e.target.id][0].name,
+      (a) => a.name === addList[e.target.id].name,
     );
     let deleteData = addList.filter(
-      (a) => a[0].name !== addList[e.target.id][0].name,
+      (a) => a.name !== addList[e.target.id].name,
     );
     setAddList(deleteData);
-    setDummyData([...dummyData, clickedData]);
+    dummyData.push(clickedData[0]);
+    const reJoinData = datas.filter((a) => dummyData.some((b) => b === a));
+    setDummyData(reJoinData);
   };
 
-  useEffect(() => {
-    console.log(addList);
-  }, [addList]);
+  useEffect(() => {}, [addList]);
   return (
     <Container>
       <DataListContainer>
         {dummyData.map((data, index) => {
           return (
-            <RepoContain selectRepo id={index} key={index}>
+            <DataList id={index} key={index}>
               <h1>{data.name}</h1>
               <span>{data.email}</span>
               <span>{data.date}</span>
               <button onClick={handleAddClick} id={index}>
                 추가
               </button>
-            </RepoContain>
+            </DataList>
           );
         })}
       </DataListContainer>
@@ -82,9 +79,9 @@ function Added() {
         {addList.map((data, index) => {
           return (
             <AddedList id={index} key={index}>
-              <h1>{data[0].name}</h1>
-              <span>{data[0].email}</span>
-              <span>{data[0].date}</span>
+              <h1>{data.name}</h1>
+              <span>{data.email}</span>
+              <span>{data.date}</span>
               <button onClick={handleDltClick} id={index}>
                 삭제
               </button>
@@ -103,8 +100,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background-color: white; */
 `;
-
 const DataListContainer = styled.div`
   margin-bottom: 20px;
   padding: 10px;
@@ -118,6 +115,7 @@ const DataList = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid #cccccc;
+  color: white;
   & button {
     width: 60px;
     height: 50px;
@@ -138,6 +136,7 @@ const AddedList = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid #cccccc;
+  color: white;
   & button {
     width: 60px;
     height: 50px;
