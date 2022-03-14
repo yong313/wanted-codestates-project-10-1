@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
@@ -13,7 +13,7 @@ export default function Issue() {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [issues, setIssues] = useState(new Array(100).fill('hi'));
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
-
+  const [clickedText, setClickedText] = useState('All');
   /* data 연동 시 받아올 형식 */
 
   //   const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
@@ -62,21 +62,22 @@ export default function Issue() {
     //
     // 2. 페이지네이션에서 활성화된 페이지 스타일 적용
   };
-
+  const setOnClick = (text) => {
+    setClickedText(text);
+  };
   return (
     <Container>
       <Nav>
         <Back> {'<'} Home</Back>
         <Buttons>
-          <Button>
-            <span>All</span>{' '}
-          </Button>
-          <Button>
-            <span>Open</span>{' '}
-          </Button>
-          <Button>
-            <span>Closed</span>{' '}
-          </Button>
+          {['All', 'Open', 'Closed'].map((text, idx) => (
+            <Button
+              text={text === clickedText}
+              onClick={() => setOnClick(text)}
+            >
+              <span>{text}</span>
+            </Button>
+          ))}
         </Buttons>
       </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
@@ -121,8 +122,6 @@ const Button = styled.button`
   line-height: 19px;
   height: 5rem;
   &:first-child {
-    color: #14161a;
-    background-color: #ffffff;
     border-radius: 2rem 0 0 2rem;
     border-left: 3px solid #ffffff;
     border-top: 3px solid #ffffff;
@@ -138,6 +137,13 @@ const Button = styled.button`
     border-top: 3px solid #ffffff;
     border-bottom: 3px solid #ffffff;
   }
+  ${({ text }) => {
+    if (!text) return;
+    return css`
+      color: #14161a;
+      background-color: #ffffff;
+    `;
+  }};
 `;
 const P = styled.div`
   font-weight: 900;

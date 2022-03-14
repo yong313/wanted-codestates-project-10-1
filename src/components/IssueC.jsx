@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from '../assets/img.png';
 export default function IssueC({ dataObj }) {
   const {
     title,
@@ -9,7 +8,6 @@ export default function IssueC({ dataObj }) {
     state,
     user: { avatar_url },
   } = dataObj;
-  console.log(avatar_url);
   return (
     <Container state={state}>
       <Title>{title}</Title>
