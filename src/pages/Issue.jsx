@@ -65,12 +65,20 @@ export default function Issue() {
 
   return (
     <Container>
-      <Back>Home</Back>
-      <Buttons>
-        <button>All</button>
-        <button>Open</button>
-        <button>Closed</button>
-      </Buttons>
+      <Nav>
+        <Back> {'<'} Home</Back>
+        <Buttons>
+          <Button>
+            <span>All</span>{' '}
+          </Button>
+          <Button>
+            <span>Open</span>{' '}
+          </Button>
+          <Button>
+            <span>Closed</span>{' '}
+          </Button>
+        </Buttons>
+      </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
         {issueDataArr.map((dataObj) => (
@@ -81,13 +89,16 @@ export default function Issue() {
     </Container>
   );
 }
-
 const Container = styled.div`
   width: 100%;
   height: 1080px;
-  background-color: white;
+  background-color: #14161a;
 `;
-
+const Nav = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12.4rem;
+`;
 const Back = styled.div`
   width: 12.6rem;
   height: 4.1rem;
@@ -99,21 +110,47 @@ const Back = styled.div`
   color: #00aaee;
 `;
 const Buttons = styled.div`
-  width: 20.5rem;
-  height: 5rem;
-  border: 3px solid #ffffff;
   box-sizing: border-box;
   border-radius: 2rem;
+`;
+const Button = styled.button`
+  color: #ffffff;
+  width: 6.9rem;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 19px;
+  height: 5rem;
+  &:first-child {
+    color: #14161a;
+    background-color: #ffffff;
+    border-radius: 2rem 0 0 2rem;
+    border-left: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
+  &:nth-child(2) {
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
+  &:last-child {
+    border-radius: 0 2rem 2rem 0;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
 `;
 const P = styled.div`
   font-weight: 900;
   font-size: 4rem;
   line-height: 4.7rem;
+  margin-top: 6.9rem;
   color: #eee;
 `;
 const IssueList = styled.div`
   width: 100%;
   display: grid;
-  gap: 1rem;
+  gap: 4.5rem;
+  justify-items: center;
+  margin-top: 5.5rem;
   grid-template-columns: repeat(3, 1fr);
 `;
