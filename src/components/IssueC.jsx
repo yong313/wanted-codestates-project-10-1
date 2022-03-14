@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import img from '../assets/img.png';
-export default function Main() {
+export default function IssueC({ dataObj }) {
+  const {
+    title,
+    repository_url,
+    created_at,
+    state,
+    user: { avatar_url },
+  } = dataObj;
+  console.log(avatar_url);
   return (
-    <Container>
-      <Title>Modal 컴포넌트 에러 해결</Title>
-      <RepoName>wanted-codestates-project-10-8</RepoName>
-      <RegistDate>1 month ago</RegistDate>
-      <State>Closed Issue</State>
-      <ProfileImg />
+    <Container state={state}>
+      <Title>{title}</Title>
+      <RepoName>{repository_url}</RepoName>
+      <RegistDate>{created_at}</RegistDate>
+      <State>{state}</State>
+      <ProfileImg avatar_url={avatar_url} />
     </Container>
   );
 }
@@ -16,7 +24,7 @@ const Container = styled.div`
   position: relative;
   width: 50rem;
   height: 30rem;
-  background: #4f5864;
+  background:${({ state }) => (state === 'open' ? '#ffffff' : '#4f5864')};
   box-shadow: 0px 2px 2rem; rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   padding:3.6rem;
@@ -56,7 +64,9 @@ const State = styled.p`
   margin-top: 11.8rem;
   color: #cccccc;
 `;
-const ProfileImg = styled.img.attrs({ src: img })`
+const ProfileImg = styled.img.attrs((props) => ({
+  src: props.avatar_url,
+}))`
   position: absolute;
   width: 8.18rem;
   height: 8.18rem;
