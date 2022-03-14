@@ -2,7 +2,7 @@
 
 ## 🌈 &nbsp; wanted-codestates-project-10-1
 
-### 📎 &nbsp; [과제링크]()
+### 📎 &nbsp; [과제링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D%B4%ED%9E%88%EC%96%B4---10%EC%A1%B0?node-id=0%3A1)
 
 <div align="center">
 <img width="300px" src=""/>
@@ -70,24 +70,29 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
 <details>
   <summary>홍인열</summary>
   <ul>
+      <li>검색 및 API 요청 기능 구현</li>
+      <li>API 요청 결과 로컬스토리지에 저장</li>
   </ul>
 </details>
 <details>
   <summary>김주영</summary>
   <ul>
-    <li></li>
+    <li>페이지 렌더전 이슈목록 API 요청</li>
+    <li>이슈목록 카드 컴포넌트생성 및 이슈목록 배열생성</li>
+    <li>이슈목록 배열 필터링 기능(All, Open, Close)</li>
   </ul>
 </details>
 <details>
   <summary>복지호</summary>
   <ul>
-   <li></li>
+   <li>이슈목록 카드 컴포넌트를 이용하여 이슈목록 페이지구성</li>
+      <li> 페이지 네이션 기능구현, 한페이지당 이슈카드 6개</li>
   </ul>
 </details>
 <details>
   <summary>우혁주</summary>
     <ul>
-      <li> </li>
+      <li>레포지토리 선택시 저장/삭제 기능 구현 (로컬스토리지에 데이터 저장/삭제) </li>
     </ul>
 </details>
 <details>
