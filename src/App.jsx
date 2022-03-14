@@ -6,7 +6,6 @@ import Main from './pages/Main';
 import styled from 'styled-components';
 import Issues from './pages/Issues';
 
-
 import Issue from './pages/Issue';
 
 function App() {
@@ -14,14 +13,15 @@ function App() {
     <Router>
       <GlobalStyles />
       <Wrapper>
-        <Routes>
-          <Route path="/" element={<Main />} />
+        <Container>
+          <Routes>
+            <Route path="/" element={<Main />} />
 
-          <Route path="/issues" element={<Issues />} />
+            <Route path="/issues" element={<Issues />} />
 
-          <Route path="/issue" element={<Issue />} />
-
-        </Routes>
+            <Route path="/issue" element={<Issue />} />
+          </Routes>
+        </Container>
       </Wrapper>
     </Router>
   );
@@ -39,5 +39,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   overflow: hidden;
   background-color: #14161a;
-
+`;
+const Container = styled.div`
+  width: 1200px;
 `;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import RepoContain from '../common/RepoContain';
 
 const datas = [
   {
@@ -65,14 +66,14 @@ function Added() {
       <DataListContainer>
         {dummyData.map((data, index) => {
           return (
-            <DataList id={index} key={index}>
+            <RepoContain selectRepo id={index} key={index}>
               <h1>{data.name}</h1>
               <span>{data.email}</span>
               <span>{data.date}</span>
               <button onClick={handleAddClick} id={index}>
                 추가
               </button>
-            </DataList>
+            </RepoContain>
           );
         })}
       </DataListContainer>
