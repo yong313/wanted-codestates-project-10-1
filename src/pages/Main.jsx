@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
+import Search from '../components/Search';
+import Spinner from '../components/Spinner';
 
 export default function Main() {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <>
       <Container>
         {/* view 작업 용 */}
         <LeftBox>
+          <Search setIsLoading={setIsLoading} />
+          {isLoading ? <Spinner /> : null}
           <Test>
             <Test2 />
             {/* 맵 돌릴 구간 */}

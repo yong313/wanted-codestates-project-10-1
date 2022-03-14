@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     ::-webkit-scrollbar {
       display: none;
     }
-    input, textarea { 
+    input, textarea {
       -moz-user-select: auto;
       -webkit-user-select: auto;
       -ms-user-select: auto;
