@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
+import Added from '../components/Added';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
   return (
     <>
       <Container>
+        <Added />
         {/* view 작업 용 */}
         <LeftBox>
           <Search setIsLoading={setIsLoading} />
