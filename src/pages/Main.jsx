@@ -5,21 +5,46 @@ import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import Added from '../components/Added';
 import axios from 'axios';
+import CautionModal from '../components/CautionModal';
+
+
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
-  // let a = localStorage.getItem('repos');
-  // let b = JSON.parse(a);
-  // console.log(b);
+  const [showFourModal, setShowFourModal] = useState(false);
+  const [showAlreadyModal, setShowAlreadyModal] = useState(false);
+
+  const modalHandler = () => {
+    // 4개 이상 등록안되요
+    // setShowFourModal(true);
+
+    // 이미등록되있어요
+    setShowAlreadyModal(true);
+  };
 
   return (
     <>
+      {showFourModal && (
+        <CautionModal
+          content="4개 이상 저장은 안돼요 😢"
+          setShowModal={setShowFourModal}
+        />
+      )}
+      {showAlreadyModal && (
+        <CautionModal
+          content="이미 저장 되었습니다 😢"
+          setShowModal={setShowAlreadyModal}
+        />
+      )}
       <Container>
         {/* view 작업 용 */}
+
         <LeftBox>
           <Test>
             <Test2>
               <Search setIsLoading={setIsLoading} />
+              {/* TestBtn 모달 테스트용  */}
+              <TestBtn onClick={modalHandler} />
             </Test2>
             {/* 맵 돌릴 구간 */}
             {isLoading ? (
@@ -74,4 +99,12 @@ const RightBox = styled.div`
   height: auto;
   display: flex;
   flex-direction: row;
+`;
+
+const TestBtn = styled.button`
+  position: fixed;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
 `;
