@@ -3,7 +3,9 @@ import reset from 'styled-reset';
 const GlobalStyles = createGlobalStyle` 
   ${reset}
     html {
-      font-size: 10px;
+
+      font-size:10px;
+
     }
     a{
         text-decoration: none;
