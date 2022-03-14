@@ -77,7 +77,9 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
 <details>
   <summary>김주영</summary>
   <ul>
-    <li></li>
+    <li>페이지 렌더전 이슈목록 API 요청</li>
+    <li>이슈목록 카드 컴포넌트생성 및 이슈목록 배열생성</li>
+    <li>이슈목록 배열 필터링 기능(All, Open, Close)</li>
   </ul>
 </details>
 <details>
