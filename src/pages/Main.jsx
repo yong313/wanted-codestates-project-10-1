@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
@@ -75,4 +76,5 @@ const RightBox = styled.div`
   width: 50%;
   height: auto;
   padding: 0 4.7rem;
+
 `;
