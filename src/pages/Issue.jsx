@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
@@ -8,8 +8,8 @@ import { headers } from '../util/util';
 const DISPLAY_CARD_LENGTH = 9;
 
 export default function Issue() {
-  const datas = [];
-  const [issueDataArr, SetIssueDataArr] = useState([]);
+  const datas = useMemo(() => [], []);
+  const [issueDataArr, setIssueDataArr] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [issues, setIssues] = useState(new Array(100).fill('hi'));
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
@@ -41,7 +41,7 @@ export default function Issue() {
           user: { id, avatar_url },
         });
       });
-      SetIssueDataArr(datas);
+      setIssueDataArr(datas);
     })();
   }, []);
 
@@ -62,8 +62,24 @@ export default function Issue() {
     //
     // 2. 페이지네이션에서 활성화된 페이지 스타일 적용
   };
+  const chageData = (text) => {
+    const newDatas = datas.filter((obj) => {
+      switch (text) {
+        case 'All':
+          return obj;
+        case 'Open':
+          return obj.state === 'open';
+        case 'Closed':
+          return obj.state === 'closed';
+        default:
+          throw new Error(`Invalid text : ${text}`);
+      }
+    });
+    setIssueDataArr(newDatas);
+  };
   const setOnClick = (text) => {
     setClickedText(text);
+    chageData(text);
   };
   return (
     <Container>
