@@ -42,10 +42,9 @@ export default function Search({ setIsLoading }) {
 const Container = styled.div``;
 
 const Title = styled.div`
-  background-color: black;
   width: 800px;
   color: #fff;
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 700;
 `;
 const Input = styled.input`
