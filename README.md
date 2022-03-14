@@ -85,7 +85,8 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
 <details>
   <summary>복지호</summary>
   <ul>
-   <li></li>
+   <li>이슈목록 카드 컴포넌트를 이용하여 이슈목록 페이지구성</li>
+      <li> 페이지 네이션 기능구현, 한페이지당 이슈카드 6개</li>
   </ul>
 </details>
 <details>
