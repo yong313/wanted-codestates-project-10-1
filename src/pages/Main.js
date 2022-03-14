@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Search from '../components/Search';
 
 export default function Main() {
-  return <Container>Main</Container>;
+  return (
+    <Container>
+      <Search />
+    </Container>
+  );
 }
 
 const Container = styled.div`
