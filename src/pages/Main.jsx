@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
@@ -10,7 +11,6 @@ export default function Main() {
   return (
     <>
       <Container>
-        <Added />
         {/* view 작업 용 */}
         <LeftBox>
           <Search setIsLoading={setIsLoading} />
@@ -35,6 +35,7 @@ export default function Main() {
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
+          <Added />
           <RepoContain selectRepo />
         </RightBox>
       </Container>
@@ -77,8 +78,6 @@ const RightBox = styled.div`
   width: 50%;
   height: auto;
   padding: 0 4.7rem;
-  width: 1920px;
-  height: 1080px;
   display: flex;
   flex-direction: row;
   background-color: white;
