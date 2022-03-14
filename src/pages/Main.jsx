@@ -77,4 +77,9 @@ const RightBox = styled.div`
   width: 50%;
   height: auto;
   padding: 0 4.7rem;
+  width: 1920px;
+  height: 1080px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
 `;
