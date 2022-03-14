@@ -2,13 +2,14 @@ import axios from 'axios';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 
-export default function Search() {
+export default function Search({ setIsLoading }) {
   const value = useRef(null);
 
   const inputHandler = (e) => {
     const url = 'https://api.github.com';
     const targetValue = value.current.value;
     if (e.code === 'Enter') {
+      setIsLoading(true);
       axios
         .get(`${url}/search/repositories?q=${targetValue}&per_page=30&page=1`, {
           headers: {
@@ -21,6 +22,7 @@ export default function Search() {
             return { userID: fullName[0], repoName: fullName[1] };
           });
           window.localStorage.setItem('repos', JSON.stringify(result));
+          setIsLoading(false);
         });
     }
   };
