@@ -93,12 +93,15 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
   <summary>우혁주</summary>
     <ul>
       <li>레포지토리 선택시 저장/삭제 기능 구현 (로컬스토리지에 데이터 저장/삭제) </li>
+        <li>이미저장된 레포의경우 모달로 알려줌</li>
+        <li>개수가 4개가넘는경우 확인 모달 구현</li>
     </ul>
 </details>
 <details>
   <summary>전용태</summary>
   <ul>
-    <li>  </li>
+    <li>검색결과로 저장된 로컬스토리지 데이터를 확용하여 결과리스트 구현</li>
+      <li>무한스크롤을 이용한 결과리스트 </li>
   </ul>
 </details>
 
