@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 export default function CautionModal({ content, setShowModal }) {
   useEffect(() => {
-    const timeOut = setTimeout(() => setShowModal(false), 700);
+    const timeOut = setTimeout(() => setShowModal(false), 1000);
     return () => {
       clearTimeout(timeOut);
     };
@@ -40,7 +40,7 @@ const Container = styled.div`
   border-radius: 20px;
   background-color: #fff;
   padding: 111px 0;
-  animation: ${rotate} 0.8s 1;
+  animation: ${rotate} 1.1s 1;
 `;
 const Content = styled.div`
   width: 100%;
@@ -58,5 +58,5 @@ const Bg = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  animation: ${rotate} 0.8s 1;
+  animation: ${rotate} 1.1s 1;
 `;

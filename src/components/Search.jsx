@@ -42,7 +42,7 @@ export default function Search({ setIsLoading }) {
 const Container = styled.div``;
 
 const Title = styled.div`
-  width: 800px;
+  width: 100%;
   color: #fff;
   font-size: 4rem;
   font-weight: 700;
