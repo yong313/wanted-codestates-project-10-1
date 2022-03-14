@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import IssueC from '../components/IssueC';
+import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { headers } from '../util/util';
+
+const DISPLAY_CARD_LENGTH = 9;
+
 export default function Issue() {
   const datas = [];
   const [issueDataArr, SetIssueDataArr] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [issues, setIssues] = useState(new Array(100).fill('hi'));
+  const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
 
   /* data 연동 시 받아올 형식 */
 
@@ -37,6 +44,25 @@ export default function Issue() {
       SetIssueDataArr(datas);
     })();
   }, []);
+
+  useEffect(() => {
+    // 페이지네이션 인덱스 갯수 계산
+    const len = issues.length;
+    const pagesLength = Math.ceil(len / DISPLAY_CARD_LENGTH);
+
+    console.log(pagesLength);
+    setNumOfPages(pagesLength);
+    // 첫 번째 인덱스로 페이지 초기화
+    setCurrentIndex(1);
+  }, [issues]);
+
+  const onClickHandler = () => {
+    // 클릭된 페이지 활성화
+    // 1. 이슈 목록 렌더링
+    //
+    // 2. 페이지네이션에서 활성화된 페이지 스타일 적용
+  };
+
   return (
     <Container>
       <Back>Home</Back>
@@ -51,6 +77,7 @@ export default function Issue() {
           <IssueC dataObj={dataObj} />
         ))}
       </IssueList>
+      <Pagination issues={issues} />
     </Container>
   );
 }
