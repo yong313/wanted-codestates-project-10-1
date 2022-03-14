@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Main from './pages/Main';
 import styled from 'styled-components';
+import Issues from './pages/Issues';
+
 function App() {
   return (
     <Router>
@@ -10,6 +12,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/issues" element={<Issues />} />
         </Routes>
       </Wrapper>
     </Router>
