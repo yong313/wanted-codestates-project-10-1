@@ -39,19 +39,17 @@ export default function Search({ setIsLoading }) {
   );
 }
 
-const Container = styled.div`
-  margin-left: 47px;
-`;
+const Container = styled.div``;
 
 const Title = styled.div`
   background-color: black;
   width: 800px;
   color: #fff;
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   font-weight: 700;
 `;
 const Input = styled.input`
-  width: 866px;
+  width: 100%;
   height: 100px;
   background-color: #4f5864;
   border-radius: 20px;

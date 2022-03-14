@@ -22,12 +22,12 @@ export default function IssueC({ dataObj }) {
 }
 const Container = styled.div`
   position: relative;
-  width: 50rem;
+  width: 100%;
   height: 30rem;
-  background:${({ state }) => (state === 'open' ? '#ffffff' : '#4f5864')};
-  box-shadow: 0px 2px 2rem; rgba(0, 0, 0, 0.1);
+  background: ${({ state }) => (state === 'open' ? '#ffffff' : '#4f5864')};
+  box-shadow: 0px 2px 2rem rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
-  padding:3.6rem;
+  padding: 3.6rem;
 `;
 const Title = styled.h1`
   font-family: 'Roboto';

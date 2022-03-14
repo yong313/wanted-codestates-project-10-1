@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
@@ -13,30 +12,33 @@ export default function Main() {
       <Container>
         {/* view 작업 용 */}
         <LeftBox>
-          <Search setIsLoading={setIsLoading} />
-          {isLoading ? <Spinner /> : null}
           <Test>
-            <Test2 />
+            <Test2>
+              <Search setIsLoading={setIsLoading} />
+            </Test2>
             {/* 맵 돌릴 구간 */}
-            <Test3>
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-              <RepoContain />
-            </Test3>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Test3>
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+                <RepoContain />
+              </Test3>
+            )}
           </Test>
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
           <Added />
-          <RepoContain selectRepo />
         </RightBox>
       </Container>
     </>
@@ -55,7 +57,6 @@ const LeftBox = styled.div`
   height: auto;
   max-height: 100vh;
   overflow: scroll;
-  padding: 3rem 4.7rem;
 `;
 
 const Test = styled.div`
@@ -66,7 +67,6 @@ const Test = styled.div`
 const Test2 = styled.div`
   width: 100%;
   height: 20%;
-  background: blue;
 `;
 
 const Test3 = styled.div`
@@ -77,8 +77,6 @@ const Test3 = styled.div`
 const RightBox = styled.div`
   width: 50%;
   height: auto;
-  padding: 0 4.7rem;
   display: flex;
   flex-direction: row;
-  background-color: white;
 `;
