@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Styled from 'styled-components';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 
 const RepoContain = (props) => {
   const { selectRepo } = props;
+
+  const [getSerchRepo, setGetSerchRepo] = useState(() => {
+    // 저장된 값 가져오기
+    const getRepos = localStorage.getItem('repos');
+    const initialValue = JSON.parse(getRepos);
+    return initialValue || '';
+  });
+  console.log(getSerchRepo);
 
   if (selectRepo) {
     return (
@@ -23,15 +31,17 @@ const RepoContain = (props) => {
 
   return (
     <>
-      <RepoContainBox>
-        <LeftBox>
-          <GithubIcon className="github_icon" />
-          <RepoName>wanted-codestates-project-1-10</RepoName>
-        </LeftBox>
-        <RightBox>
-          <AddButton className="add_btn">Add</AddButton>
-        </RightBox>
-      </RepoContainBox>
+      {getSerchRepo.map((el, idx) => (
+        <RepoContainBox key={idx}>
+          <LeftBox>
+            <GithubIcon className="github_icon" />
+            <RepoName>{el.repoName}</RepoName>
+          </LeftBox>
+          <RightBox>
+            <AddButton className="add_btn">Add</AddButton>
+          </RightBox>
+        </RepoContainBox>
+      ))}
     </>
   );
 };

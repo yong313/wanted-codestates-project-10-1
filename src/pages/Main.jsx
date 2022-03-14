@@ -4,9 +4,14 @@ import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import Added from '../components/Added';
+import axios from 'axios';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
+  // let a = localStorage.getItem('repos');
+  // let b = JSON.parse(a);
+  // console.log(b);
+
   return (
     <>
       <Container>
@@ -21,16 +26,6 @@ export default function Main() {
               <Spinner />
             ) : (
               <Test3>
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
                 <RepoContain />
               </Test3>
             )}
