@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useMemo } from 'react';
+import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
@@ -8,11 +8,11 @@ import { headers } from '../util/util';
 const DISPLAY_CARD_LENGTH = 9;
 
 export default function Issue() {
-  const datas = [];
-  const [issueDataArr, SetIssueDataArr] = useState([]);
+  const datas = useMemo(() => [], []);
+  const [issueDataArr, setIssueDataArr] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
-
+  const [clickedText, setClickedText] = useState('All');
   /* data 연동 시 받아올 형식 */
 
   //   const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
@@ -40,7 +40,7 @@ export default function Issue() {
           user: { id, avatar_url },
         });
       });
-      SetIssueDataArr(datas);
+      setIssueDataArr(datas);
     })();
   }, []);
 
@@ -58,15 +58,40 @@ export default function Issue() {
     // 클릭된 페이지 활성화
     setCurrentIndex(newIndex);
   };
-
+  const chageData = (text) => {
+    const newDatas = datas.filter((obj) => {
+      switch (text) {
+        case 'All':
+          return obj;
+        case 'Open':
+          return obj.state === 'open';
+        case 'Closed':
+          return obj.state === 'closed';
+        default:
+          throw new Error(`Invalid text : ${text}`);
+      }
+    });
+    setIssueDataArr(newDatas);
+  };
+  const setOnClick = (text) => {
+    setClickedText(text);
+    chageData(text);
+  };
   return (
     <Container>
-      <Back>Home</Back>
-      <Buttons>
-        <button>All</button>
-        <button>Open</button>
-        <button>Closed</button>
-      </Buttons>
+      <Nav>
+        <Back> {'<'} Home</Back>
+        <Buttons>
+          {['All', 'Open', 'Closed'].map((text, idx) => (
+            <Button
+              text={text === clickedText}
+              onClick={() => setOnClick(text)}
+            >
+              <span>{text}</span>
+            </Button>
+          ))}
+        </Buttons>
+      </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
         {issueDataArr
@@ -86,13 +111,16 @@ export default function Issue() {
     </Container>
   );
 }
-
 const Container = styled.div`
   width: 100%;
   height: 1080px;
-  background-color: white;
+  background-color: #14161a;
 `;
-
+const Nav = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12.4rem;
+`;
 const Back = styled.div`
   width: 12.6rem;
   height: 4.1rem;
@@ -104,21 +132,52 @@ const Back = styled.div`
   color: #00aaee;
 `;
 const Buttons = styled.div`
-  width: 20.5rem;
-  height: 5rem;
-  border: 3px solid #ffffff;
   box-sizing: border-box;
   border-radius: 2rem;
+`;
+const Button = styled.button`
+  color: #ffffff;
+  width: 6.9rem;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 19px;
+  height: 5rem;
+  &:first-child {
+    border-radius: 2rem 0 0 2rem;
+    border-left: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
+  &:nth-child(2) {
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
+  &:last-child {
+    border-radius: 0 2rem 2rem 0;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+  }
+  ${({ text }) => {
+    if (!text) return;
+    return css`
+      color: #14161a;
+      background-color: #ffffff;
+    `;
+  }};
 `;
 const P = styled.div`
   font-weight: 900;
   font-size: 4rem;
   line-height: 4.7rem;
+  margin-top: 6.9rem;
   color: #eee;
 `;
 const IssueList = styled.div`
   width: 100%;
   display: grid;
-  gap: 1rem;
+  gap: 4.5rem;
+  justify-items: center;
+  margin-top: 5.5rem;
   grid-template-columns: repeat(3, 1fr);
 `;
