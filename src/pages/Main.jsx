@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
+import Added from '../components/Added';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +35,7 @@ export default function Main() {
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
+          <Added />
           <RepoContain selectRepo />
         </RightBox>
       </Container>
@@ -76,5 +78,7 @@ const RightBox = styled.div`
   width: 50%;
   height: auto;
   padding: 0 4.7rem;
-
+  display: flex;
+  flex-direction: row;
+  background-color: white;
 `;
