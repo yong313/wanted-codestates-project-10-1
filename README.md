@@ -95,7 +95,6 @@
   <summary>우혁주</summary>
     <ul>
       <li>레포지토리 선택시 저장/삭제 기능 구현 (로컬스토리지에 데이터 저장/삭제) </li>
-      
     </ul>
 </details>
 <details>
