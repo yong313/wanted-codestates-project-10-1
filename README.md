@@ -70,6 +70,8 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
 <details>
   <summary>홍인열</summary>
   <ul>
+      <li>검색 및 API 요청 기능 구현</li>
+      <li>API 요청 결과 로컬스토리지에 저장</li>
   </ul>
 </details>
 <details>
