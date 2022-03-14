@@ -4,8 +4,10 @@ import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import Added from '../components/Added';
-import AlreadyExModal from '../components/CautionModal';
+import axios from 'axios';
 import CautionModal from '../components/CautionModal';
+
+
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +21,7 @@ export default function Main() {
     // 이미등록되있어요
     setShowAlreadyModal(true);
   };
+
   return (
     <>
       {showFourModal && (
@@ -48,16 +51,6 @@ export default function Main() {
               <Spinner />
             ) : (
               <Test3>
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
-                <RepoContain />
                 <RepoContain />
               </Test3>
             )}
