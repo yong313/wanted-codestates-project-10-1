@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import Styled from 'styled-components';
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
+import useIntersect from '../hoooks/useIntersect';
 
 const RepoContain = (props) => {
   const { selectRepo } = props;
+  // 주영님에게 질문
+  // 로컬에 검색 된 리스트를 제외한 별도의 api 호출이 필요한 지
+  // const temporaryArr = new Array(50).fill(0);
+  // console.log(temporaryArr);
+
+  const targetRef = useRef(null);
 
   const [getSerchRepo, setGetSerchRepo] = useState(() => {
     // 저장된 값 가져오기
@@ -11,7 +18,10 @@ const RepoContain = (props) => {
     const initialValue = JSON.parse(getRepos);
     return initialValue || '';
   });
-  console.log(getSerchRepo);
+  // console.log(getSerchRepo);
+
+  const newMatchRepoList = useIntersect(targetRef, getSerchRepo, 10);
+  // console.log(newMatchRepoList);
 
   if (selectRepo) {
     return (
@@ -31,22 +41,38 @@ const RepoContain = (props) => {
 
   return (
     <>
-      {getSerchRepo.map((el, idx) => (
-        <RepoContainBox key={idx}>
-          <LeftBox>
-            <GithubIcon className="github_icon" />
-            <RepoName>{el.repoName}</RepoName>
-          </LeftBox>
-          <RightBox>
-            <AddButton className="add_btn">Add</AddButton>
-          </RightBox>
-        </RepoContainBox>
-      ))}
+      <InfinityScrollBox>
+        {getSerchRepo ? (
+          <>
+            {newMatchRepoList.map((el, idx) => (
+              <RepoContainBox
+                key={idx}
+                ref={
+                  idx + 1 === newMatchRepoList.length ? targetRef : undefined
+                }
+              >
+                <LeftBox>
+                  <GithubIcon className="github_icon" />
+                  <RepoName>{el.repoName}</RepoName>
+                </LeftBox>
+                <RightBox>
+                  <AddButton className="add_btn">Add</AddButton>
+                </RightBox>
+              </RepoContainBox>
+            ))}
+          </>
+        ) : null}
+      </InfinityScrollBox>
     </>
   );
 };
 
-const RepoContainBox = Styled.div`
+const InfinityScrollBox = styled.div`
+  width: 100%;
+  height: 80%;
+`;
+
+const RepoContainBox = styled.div`
   width: 100%;
   height: 10rem;
   padding: 2rem 3rem;
@@ -58,7 +84,7 @@ const RepoContainBox = Styled.div`
   cursor: pointer;
 
   &:not(:hover) {
-    background-color: #4F5864;
+    background-color: #4f5864;
     color: #ccc;
     transition: all 0.25s ease;
 
@@ -69,41 +95,44 @@ const RepoContainBox = Styled.div`
 
   &:hover {
     background-color: #fff;
-    color: #14161A;
+    color: #14161a;
     transition: all 0.25s ease;
 
     .github_icon {
-      fill: #14161A;
+      fill: #14161a;
     }
 
     .add_btn {
-      background-color: #00ACEE;
+      background-color: #00acee;
       color: #fff;
     }
   }
 `;
 
-const LeftBox = Styled.div`
+const LeftBox = styled.div`
   width: 80%;
   height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
-const RepoName = Styled.p`
+const RepoName = styled.p`
   font-size: 3rem;
   font-weight: bold;
   margin-left: 0.8rem;
 `;
 
-const RightBox = Styled(LeftBox)`
+const RightBox = styled(LeftBox)`
   width: 20%;
   height: 100%;
   justify-content: flex-end;
 `;
 
-const AddButton = Styled.button`
+const AddButton = styled.button`
   width: auto;
   height: auto;
   padding: 1rem 2rem;
@@ -114,7 +143,7 @@ const AddButton = Styled.button`
   background-color: #ccc;
 `;
 
-const SelectRepoContainBox = Styled.div`
+const SelectRepoContainBox = styled.div`
   width: 100%;
   height: 10rem;
   padding: 2rem 3rem;
@@ -124,11 +153,11 @@ const SelectRepoContainBox = Styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: #fff;
-  color:#14161A;
+  color: #14161a;
   cursor: pointer;
 `;
 
-const DeleteButton = Styled.button`
+const DeleteButton = styled.button`
   width: auto;
   height: auto;
   padding: 1rem 2rem;
@@ -136,7 +165,7 @@ const DeleteButton = Styled.button`
   font-size: 3rem;
   font-weight: bold;
   color: #fff;
-  background-color: #EB2D4C;
+  background-color: #eb2d4c;
 `;
 
 export default RepoContain;

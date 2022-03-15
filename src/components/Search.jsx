@@ -26,6 +26,7 @@ export default function Search({ setIsLoading }) {
         });
     }
   };
+
   return (
     <Container>
       <Input

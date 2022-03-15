@@ -6,7 +6,9 @@ import Spinner from '../components/Spinner';
 import Added from '../components/Added';
 import axios from 'axios';
 import CautionModal from '../components/CautionModal';
+
 import MainTitle from '../components/MainTitle';
+
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,9 +38,8 @@ export default function Main() {
         />
       )}
       <Container>
-        {/* view 작업 용 */}
-
         <LeftBox>
+
           <Test2>
             <MainTitle content="Github Repositories Searcher 🔍" />
             <Search setIsLoading={setIsLoading} />
@@ -48,14 +49,11 @@ export default function Main() {
           {/* 맵 돌릴 구간 */}
           {isLoading ? (
             <Spinner />
-          ) : (
-            <Test3>
-              <RepoContain />
-            </Test3>
-          )}
+          ) : ( <RepoContain />)}
         </LeftBox>
         <MainTitle content="Search In Repository 😎" />
         {/* view 작업 용 */}
+
         <RightBox>
           <Added />
         </RightBox>
@@ -84,12 +82,6 @@ const Test2 = styled.div`
   width: 100%;
 `;
 
-const Test3 = styled.div`
-  overflow: scroll;
-  margin-top: 5rem;
-  width: 100%;
-  height: 80%;
-`;
 
 const RightBox = styled.div`
   background-color: pink;
