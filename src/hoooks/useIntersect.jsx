@@ -1,16 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const useIntersect = (targetRef, getSerchRepo, PAGE_NUMBER) => {
+const useIntersect = (targetRef, getSearchRepo, PAGE_NUMBER) => {
   const [page, setPage] = useState(PAGE_NUMBER);
-  const showList = getSerchRepo.slice(0, page);
+  const [showList, setShowList] = useState([]);
+  // console.log(getSearchRepo.slice(0, page));
+  console.log(showList);
   const callback = useCallback(
     ([entry], observer) => {
       if (entry.isIntersecting)
-        setPage(getSerchRepo.length > page ? page + 10 : getSerchRepo.length);
+        setPage(getSearchRepo.length > page ? page + 10 : getSearchRepo.length);
     },
     [page],
   );
   useEffect(() => {
+    if (Array.isArray(getSearchRepo)) {
+      setShowList(getSearchRepo.slice(0, page));
+    }
     if (!targetRef.current) return;
     const observer = new IntersectionObserver(callback, {
       root: null,
@@ -20,6 +25,7 @@ const useIntersect = (targetRef, getSerchRepo, PAGE_NUMBER) => {
     observer.observe(targetRef.current);
     return () => observer.disconnect();
   }, [targetRef, callback]);
+  // return showList;
   return showList;
 };
 
