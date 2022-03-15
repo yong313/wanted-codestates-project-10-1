@@ -13,7 +13,6 @@ export default function Issue() {
   const datas = useMemo(() => [], []);
   const [issueDataArr, setIssueDataArr] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [issues, setIssues] = useState(new Array(100).fill('hi'));
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
   const [clickedText, setClickedText] = useState('All');
   /* data 연동 시 받아올 형식 */
@@ -53,20 +52,17 @@ export default function Issue() {
 
   useEffect(() => {
     // 페이지네이션 인덱스 갯수 계산
-    const len = issues.length;
+    const len = issueDataArr.length;
     const pagesLength = Math.ceil(len / DISPLAY_CARD_LENGTH);
 
-    console.log(pagesLength);
     setNumOfPages(pagesLength);
     // 첫 번째 인덱스로 페이지 초기화
     setCurrentIndex(1);
-  }, [issues]);
+  }, [issueDataArr]);
 
-  const onClickHandler = () => {
+  const changePageIndex = (newIndex) => {
     // 클릭된 페이지 활성화
-    // 1. 이슈 목록 렌더링
-    //
-    // 2. 페이지네이션에서 활성화된 페이지 스타일 적용
+    setCurrentIndex(newIndex);
   };
   const chageData = (text) => {
     const newDatas = datas.filter((obj) => {
@@ -105,11 +101,22 @@ export default function Issue() {
       </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
-        {issueDataArr.map((dataObj) => (
-          <IssueC key={dataObj.number} dataObj={dataObj} />
-        ))}
+
+        {issueDataArr
+          .slice(
+            DISPLAY_CARD_LENGTH * (currentIndex - 1),
+            DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
+          )
+          .map((dataObj) => (
+            <IssueC key={dataObj.number}  dataObj={dataObj} />
+          ))}
+
       </IssueList>
-      <Pagination issues={issues} />
+      <Pagination
+        currentIndex={currentIndex}
+        numOfPages={numOfPages}
+        changePageIndex={changePageIndex}
+      />
     </Container>
   );
 }

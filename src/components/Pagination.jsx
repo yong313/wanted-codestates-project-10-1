@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Pagination = (props) => {
+function Pagination({ currentIndex, numOfPages, changePageIndex }) {
+  const [pageIndexArray, setPageIndexArray] = useState(
+    Array.from({ length: numOfPages }, (_, idx) => idx + 1),
+  );
+
+  useEffect(() => {
+    setPageIndexArray(Array.from({ length: numOfPages }, (_, idx) => idx + 1));
+  }, [numOfPages]);
+
+  const clickEventHandler = (e) => {
+    if (e.target.textContent === 'prev') {
+      changePageIndex(currentIndex * 1 - 1);
+    } else if (e.target.textContent === 'next') {
+      changePageIndex(currentIndex * 1 + 1);
+    } else {
+      changePageIndex(e.target.textContent * 1);
+    }
+  };
+
   return (
     <Wrapper>
-      <Button>prev</Button>
+      <Button onClick={clickEventHandler}>prev</Button>
       <PagesWrapper>
-        <li className="active">1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
+        {pageIndexArray.map((pIndex) => {
+          return pIndex === currentIndex ? (
+            <li className="active" onClick={clickEventHandler}>
+              {pIndex}
+            </li>
+          ) : (
+            <li onClick={clickEventHandler}>{pIndex}</li>
+          );
+        })}
       </PagesWrapper>
-      <Button>next</Button>
+      <Button onClick={clickEventHandler}>next</Button>
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   width: 20rem;
@@ -33,6 +56,7 @@ const Button = styled.button`
   font-size: 3rem;
   font-weight: 600;
   margin: 0.6rem;
+  cursor: pointer;
 `;
 const PagesWrapper = styled.ul`
   width: fit-content;

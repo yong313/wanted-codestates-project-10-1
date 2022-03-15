@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import Styled from 'styled-components';
-import Button from '../common/Button';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 
 const RepoContain = (props) => {
   const { selectRepo } = props;
 
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [getSerchRepo, setGetSerchRepo] = useState(() => {
+    // 저장된 값 가져오기
+    const getRepos = localStorage.getItem('repos');
+    const initialValue = JSON.parse(getRepos);
+    return initialValue || '';
+  });
+  console.log(getSerchRepo);
 
   if (selectRepo) {
     return (
       <>
         <SelectRepoContainBox>
           <LeftBox>
-            <GithubIcon fill="#14161A" />
+            <GithubIcon />
             <RepoName>wanted-codestates-project-1-10</RepoName>
           </LeftBox>
           <RightBox>
-            <Button deleteBtn />
+            <DeleteButton>Delete</DeleteButton>
           </RightBox>
         </SelectRepoContainBox>
       </>
@@ -26,15 +31,17 @@ const RepoContain = (props) => {
 
   return (
     <>
-      <RepoContainBox disabled={!buttonDisabled}>
-        <LeftBox>
-          <GithubIcon className="github_icon" />
-          <RepoName>wanted-codestates-project-1-10</RepoName>
-        </LeftBox>
-        <RightBox>
-          <Button />
-        </RightBox>
-      </RepoContainBox>
+      {getSerchRepo.map((el, idx) => (
+        <RepoContainBox key={idx}>
+          <LeftBox>
+            <GithubIcon className="github_icon" />
+            <RepoName>{el.repoName}</RepoName>
+          </LeftBox>
+          <RightBox>
+            <AddButton className="add_btn">Add</AddButton>
+          </RightBox>
+        </RepoContainBox>
+      ))}
     </>
   );
 };
@@ -48,19 +55,32 @@ const RepoContainBox = Styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 
-  ${(props) =>
-    props.disabled
-      ? `
-        color: #ccc; 
-        background-color: #4F5864; 
-        cursor: default;`
-      : ``}
+  &:not(:hover) {
+    background-color: #4F5864;
+    color: #ccc;
+    transition: all 0.25s ease;
 
-      .github_icon {
-        fill: #4F5864;
-        ${(props) => (props.disabled ? `fill: #ccc;` : ``)}
-      }
+    .github_icon {
+      fill: #ccc;
+    }
+  }
+
+  &:hover {
+    background-color: #fff;
+    color: #14161A;
+    transition: all 0.25s ease;
+
+    .github_icon {
+      fill: #14161A;
+    }
+
+    .add_btn {
+      background-color: #00ACEE;
+      color: #fff;
+    }
+  }
 `;
 
 const LeftBox = Styled.div`
@@ -83,9 +103,40 @@ const RightBox = Styled(LeftBox)`
   justify-content: flex-end;
 `;
 
-const SelectRepoContainBox = Styled(RepoContainBox)`
+const AddButton = Styled.button`
+  width: auto;
+  height: auto;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ccc;
+`;
+
+const SelectRepoContainBox = Styled.div`
+  width: 100%;
+  height: 10rem;
+  padding: 2rem 3rem;
+  margin: 2rem 0;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   background-color: #fff;
   color:#14161A;
+  cursor: pointer;
+`;
+
+const DeleteButton = Styled.button`
+  width: auto;
+  height: auto;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #EB2D4C;
 `;
 
 export default RepoContain;
