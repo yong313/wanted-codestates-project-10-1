@@ -43,7 +43,7 @@ export default function Main() {
           <Search setIsLoading={setIsLoading} />
 
           {/* 맵 돌릴 구간 */}
-          <ResultBox>{isLoading ? <Spinner /> : <SearchResult />}</ResultBox>
+          <ResultBox>{isLoading ? <Spinner /> : <RepoContain />}</ResultBox>
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
