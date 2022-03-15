@@ -8,6 +8,7 @@ import CautionModal from '../components/CautionModal';
 
 import MainTitle from '../components/MainTitle';
 import AddedResult from '../components/AddedResult';
+import SearchResult from '../components/SearchResult';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +43,7 @@ export default function Main() {
           <Search setIsLoading={setIsLoading} />
 
           {/* 맵 돌릴 구간 */}
-          <ResultBox>{isLoading ? <Spinner /> : <RepoContain />}</ResultBox>
+          <ResultBox>{isLoading ? <Spinner /> : <SearchResult />}</ResultBox>
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
