@@ -6,8 +6,8 @@ import Spinner from '../components/Spinner';
 import Added from '../components/Added';
 import CautionModal from '../components/CautionModal';
 
-
 import MainTitle from '../components/MainTitle';
+import AddedResult from '../components/AddedResult';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,13 +46,8 @@ export default function Main() {
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
-
-    
-
           <MainTitle content="Search In Repository 😎" />
-                  <RepoContain selectRepo />
-          <Added />
-
+          <AddedResult />
         </RightBox>
       </Container>
     </>
