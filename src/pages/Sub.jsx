@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
-import Added from '../components/Added';
 import axios from 'axios';
 import CautionModal from '../components/CautionModal';
+import RepoContainer from '../common/RepoContainer';
+import SearchResult from '../components/SearchResult';
+import AddedResult from '../components/AddedResult';
 
-export default function Main() {
+export default function Sub() {
   const [isLoading, setIsLoading] = useState(false);
   const [showFourModal, setShowFourModal] = useState(false);
   const [showAlreadyModal, setShowAlreadyModal] = useState(false);
@@ -49,14 +50,14 @@ export default function Main() {
               <Spinner />
             ) : (
               <Test3>
-                <RepoContain />
+                <SearchResult />
               </Test3>
             )}
           </Test>
         </LeftBox>
         {/* view 작업 용 */}
         <RightBox>
-          <RepoContain selectRepo />
+          <AddedResult />
         </RightBox>
       </Container>
     </>
@@ -74,17 +75,22 @@ const LeftBox = styled.div`
   width: 50%;
   height: auto;
   max-height: 100vh;
+
   overflow: scroll;
 `;
 
 const Test = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 const Test2 = styled.div`
   width: 100%;
   height: 20%;
+  margin-bottom: 100px;
 `;
 
 const Test3 = styled.div`
