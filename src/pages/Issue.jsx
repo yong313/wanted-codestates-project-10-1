@@ -21,9 +21,11 @@ export default function Issue() {
   // const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
   // const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all`;
 
-  const URL =
-    'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all&&per_page=100';
-
+  const { userID, repoName } = JSON.parse(
+    window.localStorage.getItem('selectedRepos'),
+  );
+  console.log(userID, repoName);
+  const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all&&per_page=100`;
   useEffect(() => {
     (async () => {
       const { data: dataArr } = await axios.get(URL, headers);
@@ -101,7 +103,7 @@ export default function Issue() {
           ))}
         </Buttons>
       </Nav>
-      <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
+      <P>{userID + ' / ' + repoName}</P>
       <IssueList>
         {issueDataArr
           .slice(
