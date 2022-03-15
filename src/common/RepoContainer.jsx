@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import Styled from 'styled-components';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 
@@ -13,7 +13,6 @@ const RepoContainer = ({
   handleSetLocalStorage,
   targetRef,
 }) => {
-  const ref = useRef(null);
   return (
     <>
       <RepoContainBox
@@ -104,31 +103,6 @@ const AddButton = Styled.button`
   font-weight: bold;
   color: #fff;
   background-color: #ccc;
-`;
-
-const SelectRepoContainBox = Styled.div`
-  width: 100%;
-  height: 10rem;
-  padding: 2rem 3rem;
-  margin: 2rem 0;
-  border-radius: 2rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fff;
-  color:#14161A;
-  cursor: pointer;
-`;
-
-const DeleteButton = Styled.button`
-  width: auto;
-  height: auto;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  font-size: 3rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #EB2D4C;
 `;
 
 export default RepoContainer;

@@ -6,10 +6,8 @@ import { counterData } from '../modules/mainPage';
 const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
   const page = useSelector((state) => state.mainPage.pageCounter);
   const searchText = useSelector((state) => state.mainPage.searchString);
-  console.log(searchText);
   const [showList, setShowList] = useState([]);
   const dispatch = useDispatch();
-  console.log(getSearchRepo);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getApiHandler = (target, page) => {
     const url = 'https://api.github.com';
@@ -23,7 +21,7 @@ const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
             },
           },
         );
-        console.log(res);
+
         const result = res.data.items.map((el) => {
           const fullName = el.full_name.split('/');
           return { userID: fullName[0], repoName: fullName[1] };

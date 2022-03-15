@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import RepoContainer from '../common/RepoContainer';
 import styled from 'styled-components';
-import { searchAfterAdd, setDatas } from '../modules/mainPage';
+import { searchAfterAdd } from '../modules/mainPage';
 import useIntersect from '../hoooks/useIntersect';
 
 function SearchResult() {
@@ -15,7 +15,7 @@ function SearchResult() {
     const initialValue = JSON.parse(getRepos);
     const result = initialValue ? initialValue : '';
     setCurrentData(result);
-  }, [window.localStorage.getItem('repos')]);
+  }, []);
 
   const newMatchRepoList = useIntersect(targetRef, currentData, 10);
   const handleAddClick = (e) => {

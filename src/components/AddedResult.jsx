@@ -11,9 +11,6 @@ function AddedResult() {
   const handleDltClick = (e) => {
     e.stopPropagation();
     const target = e.target.id;
-    let clickedData = addRepositories.filter(
-      (current, i) => Number(target) === i,
-    );
     let leftData = addRepositories.filter((current, i) => Number(target) !== i);
     dispatch(deleteData(leftData));
   };
@@ -29,6 +26,7 @@ function AddedResult() {
         addRepositories.map((repo, index) => {
           return (
             <RepoContainer
+              key={index}
               repo={repo}
               id={index}
               handleDltClick={(e) => handleDltClick(e)}

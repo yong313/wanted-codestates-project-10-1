@@ -3,6 +3,8 @@ export const AFTER_DATA = 'address/AFTER_DATA';
 export const DELETE_DATA = 'address/DELETE_DATA';
 export const COUNTER_DATA = 'address/COUNTER_DATA';
 export const SEARCH_DATA = 'address/SEARCH_DATA';
+export const MODAL_OPEN = 'address/MODAL_OPEN';
+export const SECOND_MODAL = 'address/SECOND_MODAL';
 
 const initialState = {
   compareData: [],
@@ -10,7 +12,12 @@ const initialState = {
   addRepo: [],
   pageCounter: 2,
   searchString: '',
+  modalOpen: false,
+  secondModal: false,
 };
+
+export const setFourModal = () => ({ type: MODAL_OPEN });
+export const setOverlapModal = () => ({ type: SECOND_MODAL });
 
 export const setDatas = (datas) => ({ type: SET_DATA, datas });
 export const searchAfterAdd = (addData) => ({
@@ -34,7 +41,6 @@ export default function reducer(state = initialState, action) {
         compareData: action.datas,
       };
     case AFTER_DATA:
-      console.log(action.addData);
       return {
         ...state,
         addRepo: [...state.addRepo, action.addData],
@@ -53,6 +59,16 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         searchString: action.searchText,
+      };
+    case MODAL_OPEN:
+      return {
+        ...state,
+        modalOpen: !state.modalOpen,
+      };
+    case SECOND_MODAL:
+      return {
+        ...state,
+        secondModal: !state.secondModal,
       };
 
     default:
