@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
@@ -8,6 +9,7 @@ import { headers } from '../util/util';
 const DISPLAY_CARD_LENGTH = 9;
 
 export default function Issue() {
+  const navigate = useNavigate();
   const datas = useMemo(() => [], []);
   const [issueDataArr, setIssueDataArr] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -15,8 +17,8 @@ export default function Issue() {
   const [clickedText, setClickedText] = useState('All');
   /* data 연동 시 받아올 형식 */
 
-  //   const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
-  //   const URL = `https://api.github.com/repos/${userId}/${repoName}/issues?state=all`;
+  // const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
+  // const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all`;
 
   const URL =
     'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all';
@@ -30,6 +32,8 @@ export default function Issue() {
           repository_url,
           created_at,
           state,
+          html_url,
+          number,
           user: { id, avatar_url },
         } = data;
         datas.push({
@@ -37,6 +41,8 @@ export default function Issue() {
           repository_url,
           created_at,
           state,
+          html_url,
+          number,
           user: { id, avatar_url },
         });
       });
@@ -80,10 +86,11 @@ export default function Issue() {
   return (
     <Container>
       <Nav>
-        <Back> {'<'} Home</Back>
+        <Back onClick={() => navigate('/')}> {'<'} Home</Back>
         <Buttons>
           {['All', 'Open', 'Closed'].map((text, idx) => (
             <Button
+              key={idx}
               text={text === clickedText}
               onClick={() => setOnClick(text)}
             >
@@ -94,14 +101,16 @@ export default function Issue() {
       </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
+
         {issueDataArr
           .slice(
             DISPLAY_CARD_LENGTH * (currentIndex - 1),
             DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
           )
           .map((dataObj) => (
-            <IssueC dataObj={dataObj} />
+            <IssueC key={dataObj.number}  dataObj={dataObj} />
           ))}
+
       </IssueList>
       <Pagination
         currentIndex={currentIndex}
@@ -129,6 +138,7 @@ const Back = styled.div`
   font-weight: 900;
   font-size: 3.5rem;
   line-height: 4.1rem;
+  cursor: pointer;
   color: #00aaee;
 `;
 const Buttons = styled.div`
