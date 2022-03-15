@@ -8,7 +8,7 @@ const RepoContain = (props) => {
   const targetRef = useRef(null);
   const [getSerchRepo, setGetSearchRepo] = useState(() => {
     // 저장된 값 가져오기
-    const getRepos = localStorage.getItem('repos');
+    const getRepos = window.localStorage.getItem('repos');
     const initialValue = JSON.parse(getRepos);
     return initialValue || '';
   });

@@ -16,17 +16,8 @@ function SearchResult() {
     const result = initialValue ? initialValue : '';
     setCurrentData(result);
   }, [window.localStorage.getItem('repos')]);
-  const newMatchRepoList = useIntersect(targetRef, currentData, 10);
-  console.log(currentData);
-  console.log(newMatchRepoList);
 
-  // ------------------------------------------------
-  // useEffect(() => {
-  //   const getRepos = window.localStorage.getItem('repos');
-  //   const initialValue = JSON.parse(getRepos);
-  //   const result = initialValue ? initialValue : '';
-  //   setCurrentData(result);
-  // }, [window.localStorage.getItem('repos')]);
+  const newMatchRepoList = useIntersect(targetRef, currentData, 10);
   const handleAddClick = (e) => {
     const target = e.target.id;
     const addData = currentData.filter(
@@ -40,7 +31,7 @@ function SearchResult() {
   };
   return (
     <InfinityScrollBox>
-      {currentData.length > 0 ? (
+      {currentData.length !== 0 ? (
         <>
           {newMatchRepoList.map((data, index) => (
             <RepoContainer
@@ -50,7 +41,7 @@ function SearchResult() {
               button={'Add'}
               key={index}
               ref={
-                index + 10 === newMatchRepoList.length ? targetRef : undefined
+                index + 1 === newMatchRepoList.length ? targetRef : undefined
               }
             />
           ))}

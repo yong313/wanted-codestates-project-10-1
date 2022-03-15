@@ -20,7 +20,6 @@ function AddedResult() {
   const handleSetLocalStorage = (e) => {
     const target = Number(e.target.id);
     const clickedData = addRepositories[target];
-    console.log(e);
     window.localStorage.setItem('selectedRepos', JSON.stringify(clickedData));
     navigate('/issue');
   };

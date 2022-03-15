@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Styled from 'styled-components';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 
@@ -11,14 +11,14 @@ const RepoContainer = ({
   selectRepo,
   button,
   handleSetLocalStorage,
-  ref,
+  targetRef,
 }) => {
-  console.log(ref);
+  const ref = useRef(null);
   return (
     <>
       <RepoContainBox
         onClick={handleSetLocalStorage}
-        ref={selectRepo ? null : ref}
+        ref={selectRepo ? null : targetRef}
       >
         <LeftBox>
           <GithubIcon className="github_icon" />

@@ -8,6 +8,7 @@ const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
   const searchText = useSelector((state) => state.mainPage.searchString);
   console.log(searchText);
   const [showList, setShowList] = useState([]);
+<<<<<<< Updated upstream
   const dispatch = useDispatch();
   console.log(getSearchRepo);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,6 +38,10 @@ const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
     })();
   };
 
+=======
+  // console.log(getSearchRepo.slice(0, page));
+  // console.log(showList);
+>>>>>>> Stashed changes
   const callback = useCallback(
     ([entry]) => {
       if (entry.isIntersecting) {
