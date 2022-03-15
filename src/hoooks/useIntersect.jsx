@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { counterData } from '../modules/mainPage';
-
+// 왜그래 정말
 const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
   const page = useSelector((state) => state.mainPage.pageCounter);
   const searchText = useSelector((state) => state.mainPage.searchString);
