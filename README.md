@@ -12,6 +12,8 @@
 
 ### 🪄&nbsp; 기획 - [Figma](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D%B4%ED%9E%88%EC%96%B4---10%EC%A1%B0?node-id=0%3A1)
  
+<br /> 
+ 
 #### 🎉 &nbsp; 기능
 - repo 검색, 저장(최대4개), 삭제
 - 저장된 repo 선택시 issue 보기
