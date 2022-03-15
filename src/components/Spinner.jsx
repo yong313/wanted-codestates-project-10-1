@@ -75,7 +75,7 @@ const Loader = styled.div`
     content: '';
   }
   :after {
-    background: #0dc5c1;
+    background: #14161a;
     width: 75%;
     height: 75%;
     border-radius: 50%;
