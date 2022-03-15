@@ -9,6 +9,7 @@ function AddedResult() {
   const navigate = useNavigate();
   const addRepositories = useSelector((state) => state.mainPage.addRepo);
   const handleDltClick = (e) => {
+    e.stopPropagation();
     const target = e.target.id;
     let clickedData = addRepositories.filter(
       (current, i) => Number(target) === i,
