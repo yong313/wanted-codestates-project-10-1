@@ -103,7 +103,7 @@ function Added() {
 }
 
 const Container = styled.div`
-  width: 80vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;

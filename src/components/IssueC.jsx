@@ -6,19 +6,33 @@ export default function IssueC({ dataObj }) {
     repository_url,
     created_at,
     state,
+    html_url,
     user: { avatar_url },
   } = dataObj;
+
+  const getDate = () => {
+    const createdDate = new Date(created_at);
+    const currDate = new Date();
+    const yDiff = currDate.getFullYear() - createdDate.getFullYear();
+    const mDiff = currDate.getMonth() - createdDate.getMonth();
+    const dDiff = currDate.getDate() - createdDate.getDate();
+    const date = parseInt((yDiff * 365 + mDiff * 30 + dDiff) / 30);
+    return date ? date + ' month' : dDiff + ' day';
+  };
+
   return (
-    <Container state={state}>
+    <Container state={state} url={html_url}>
       <Title>{title}</Title>
       <RepoName>{repository_url}</RepoName>
-      <RegistDate>{created_at}</RegistDate>
+      <RegistDate> {getDate()} ago</RegistDate>
       <State>{state}</State>
       <ProfileImg avatar_url={avatar_url} />
     </Container>
   );
 }
-const Container = styled.div`
+const Container = styled.a.attrs((props) => ({
+  href: props.url,
+}))`
   position: relative;
   width: 36.748rem;
   height: 22.049rem;
@@ -26,6 +40,7 @@ const Container = styled.div`
   box-shadow: 0px 2px 2rem rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   padding: 3.6rem;
+  cursor: pointer;
 `;
 const Title = styled.h1`
   font-family: 'Roboto';

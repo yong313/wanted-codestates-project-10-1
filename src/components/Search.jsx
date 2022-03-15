@@ -26,9 +26,9 @@ export default function Search({ setIsLoading }) {
         });
     }
   };
+
   return (
     <Container>
-      <Title>Github Repositories Searcher 🔍</Title>
       <Input
         ref={value}
         // onChange={inputHandler}
@@ -41,22 +41,17 @@ export default function Search({ setIsLoading }) {
 
 const Container = styled.div``;
 
-const Title = styled.div`
-  width: 100%;
-  color: #fff;
-  font-size: 4rem;
-  font-weight: 700;
-`;
 const Input = styled.input`
   width: 100%;
-  height: 100px;
-  background-color: #4f5864;
+  height: 6.4rem;
   border-radius: 20px;
-  font-size: 3rem;
+  font-size: 2.5rem;
   padding: 0 23px;
   outline: none;
-  margin-top: 6.3rem;
+  margin-top: 5rem;
+
   ::placeholder {
     color: #cccccc;
+    font-weight: 700;
   }
 `;
