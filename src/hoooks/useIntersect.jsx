@@ -3,10 +3,10 @@ import { useState, useEffect, useCallback } from 'react';
 const useIntersect = (targetRef, getSerchRepo, PAGE_NUMBER) => {
   const [page, setPage] = useState(PAGE_NUMBER);
   const showList = getSerchRepo.slice(0, page);
-  console.log(showList);
   const callback = useCallback(
     ([entry], observer) => {
-      if (entry.isIntersecting) setPage(page + 10);
+      if (entry.isIntersecting)
+        setPage(getSerchRepo.length > page ? page + 10 : getSerchRepo.length);
     },
     [page],
   );

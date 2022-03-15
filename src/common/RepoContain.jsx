@@ -1,17 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 import useIntersect from '../hoooks/useIntersect';
 
 const RepoContain = (props) => {
   const { selectRepo } = props;
-  // 주영님에게 질문
-  // 로컬에 검색 된 리스트를 제외한 별도의 api 호출이 필요한 지
-  // const temporaryArr = new Array(50).fill(0);
-  // console.log(temporaryArr);
-
   const targetRef = useRef(null);
-
   const [getSerchRepo, setGetSerchRepo] = useState(() => {
     // 저장된 값 가져오기
     const getRepos = localStorage.getItem('repos');
@@ -19,9 +13,8 @@ const RepoContain = (props) => {
     return initialValue || '';
   });
   // console.log(getSerchRepo);
-
   const newMatchRepoList = useIntersect(targetRef, getSerchRepo, 10);
-  // console.log(newMatchRepoList);
+  console.log(newMatchRepoList);
 
   if (selectRepo) {
     return (
@@ -70,6 +63,7 @@ const RepoContain = (props) => {
 const InfinityScrollBox = styled.div`
   width: 100%;
   height: 80%;
+  overflow: scroll;
 `;
 
 const RepoContainBox = styled.div`

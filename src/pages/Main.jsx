@@ -4,7 +4,6 @@ import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import Added from '../components/Added';
-import axios from 'axios';
 import CautionModal from '../components/CautionModal';
 
 import MainTitle from '../components/MainTitle';
