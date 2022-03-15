@@ -9,7 +9,6 @@ import CautionModal from '../components/CautionModal';
 
 import MainTitle from '../components/MainTitle';
 
-
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
   const [showFourModal, setShowFourModal] = useState(false);
@@ -39,7 +38,6 @@ export default function Main() {
       )}
       <Container>
         <LeftBox>
-
           <Test2>
             <MainTitle content="Github Repositories Searcher 🔍" />
             <Search setIsLoading={setIsLoading} />
@@ -47,14 +45,12 @@ export default function Main() {
             <TestBtn onClick={modalHandler} />
           </Test2>
           {/* 맵 돌릴 구간 */}
-          {isLoading ? (
-            <Spinner />
-          ) : ( <RepoContain />)}
+          {isLoading ? <Spinner /> : <RepoContain />}
         </LeftBox>
-        <MainTitle content="Search In Repository 😎" />
         {/* view 작업 용 */}
 
         <RightBox>
+          <MainTitle content="Search In Repository 😎" />
           <Added />
         </RightBox>
       </Container>
@@ -82,13 +78,12 @@ const Test2 = styled.div`
   width: 100%;
 `;
 
-
 const RightBox = styled.div`
   background-color: pink;
   width: 50%;
   height: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0 2.5rem;
 `;
 
