@@ -15,11 +15,8 @@ function AddedResult() {
     dispatch(deleteData(leftData));
   };
   const handleSetLocalStorage = (e, idx) => {
-    console.log(addRepositories);
     const target = Number(idx);
-    console.log(target);
     const clickedData = addRepositories[target];
-    console.log(clickedData);
     window.localStorage.setItem('selectedRepos', JSON.stringify(clickedData));
     navigate('/issue');
   };

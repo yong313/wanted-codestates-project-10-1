@@ -116,13 +116,13 @@ export default function Issue() {
           <ShowWarnings>{showWarnings}</ShowWarnings>
         )}
       </IssueList>
-      {issueDataArr.length && (
+      {issueDataArr.length ? (
         <Pagination
           currentIndex={currentIndex}
           numOfPages={numOfPages}
           changePageIndex={changePageIndex}
         />
-      )}
+      ) : null}
     </Container>
   );
 }
