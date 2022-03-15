@@ -6,15 +6,19 @@ import useIntersect from '../hoooks/useIntersect';
 const RepoContain = (props) => {
   const { selectRepo } = props;
   const targetRef = useRef(null);
-  const [getSerchRepo, setGetSerchRepo] = useState(() => {
+  const [getSerchRepo, setGetSearchRepo] = useState(() => {
     // 저장된 값 가져오기
     const getRepos = localStorage.getItem('repos');
     const initialValue = JSON.parse(getRepos);
     return initialValue || '';
   });
   // console.log(getSerchRepo);
-  const newMatchRepoList = useIntersect(targetRef, getSerchRepo, 10);
-  console.log(newMatchRepoList);
+  const newMatchRepoList = useIntersect(
+    targetRef,
+    getSerchRepo,
+    setGetSearchRepo,
+  );
+  // console.log(newMatchRepoList);
 
   if (selectRepo) {
     return (
@@ -41,7 +45,7 @@ const RepoContain = (props) => {
               <RepoContainBox
                 key={idx}
                 ref={
-                  idx + 1 === newMatchRepoList.length ? targetRef : undefined
+                  idx + 10 === newMatchRepoList.length ? targetRef : undefined
                 }
               >
                 <LeftBox>

@@ -11,10 +11,15 @@ const RepoContainer = ({
   selectRepo,
   button,
   handleSetLocalStorage,
+  ref,
 }) => {
+  console.log(ref);
   return (
     <>
-      <RepoContainBox onClick={handleSetLocalStorage}>
+      <RepoContainBox
+        onClick={handleSetLocalStorage}
+        ref={selectRepo ? null : ref}
+      >
         <LeftBox>
           <GithubIcon className="github_icon" />
           <RepoName>{selectRepo ? repo.repoName : data.repoName}</RepoName>

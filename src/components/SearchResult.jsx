@@ -1,21 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RepoContainer from '../common/RepoContainer';
+import styled from 'styled-components';
 import { searchAfterAdd, setDatas } from '../modules/mainPage';
+import useIntersect from '../hoooks/useIntersect';
 
 function SearchResult() {
   const dispatch = useDispatch();
-  // 로컬 스토리지에 있는 데이터
-  const [detect, setDetect] = useState(false);
-  const [currentData, setCurrentData] = useState();
-  // const [getSearchRepo, setGetSearchRepo] = useState();
-  // const currentData = useSelector((state) => state.mainPage.repoData);
+  const [currentData, setCurrentData] = useState([]);
+  // -----------------------무한 스크롤---------------------
+  const targetRef = useRef(null);
   useEffect(() => {
     const getRepos = window.localStorage.getItem('repos');
     const initialValue = JSON.parse(getRepos);
     const result = initialValue ? initialValue : '';
     setCurrentData(result);
   }, [window.localStorage.getItem('repos')]);
+  const newMatchRepoList = useIntersect(targetRef, currentData, 10);
+  console.log(currentData);
+  console.log(newMatchRepoList);
+
+  // ------------------------------------------------
+  // useEffect(() => {
+  //   const getRepos = window.localStorage.getItem('repos');
+  //   const initialValue = JSON.parse(getRepos);
+  //   const result = initialValue ? initialValue : '';
+  //   setCurrentData(result);
+  // }, [window.localStorage.getItem('repos')]);
   const handleAddClick = (e) => {
     const target = e.target.id;
     const addData = currentData.filter(
@@ -27,27 +38,33 @@ function SearchResult() {
     window.localStorage.setItem('repos', JSON.stringify(changeData));
     dispatch(searchAfterAdd(addData[0]));
   };
-  // console.log('current', currentData);
-  // useEffect(() => {
-
-  // }, detect);
   return (
-    <>
-      {currentData &&
-        currentData.map((data, index) => {
-          // console.log(data);
-          return (
+    <InfinityScrollBox>
+      {currentData.length > 0 ? (
+        <>
+          {newMatchRepoList.map((data, index) => (
             <RepoContainer
               data={data}
               id={index}
               handleAddClick={(e) => handleAddClick(e)}
               button={'Add'}
+              key={index}
+              ref={
+                index + 10 === newMatchRepoList.length ? targetRef : undefined
+              }
             />
-          );
-        })}
-    </>
+          ))}
+        </>
+      ) : null}
+    </InfinityScrollBox>
   );
 }
+
+const InfinityScrollBox = styled.div`
+  width: 100%;
+  height: 80%;
+  overflow: scroll;
+`;
 
 export default SearchResult;
 

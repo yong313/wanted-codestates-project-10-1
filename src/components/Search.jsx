@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { searchData } from '../modules/mainPage';
 
 export default function Search({ setIsLoading }) {
   const value = useRef(null);
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     const url = 'https://api.github.com';
@@ -11,7 +14,7 @@ export default function Search({ setIsLoading }) {
     if (e.code === 'Enter') {
       setIsLoading(true);
       axios
-        .get(`${url}/search/repositories?q=${targetValue}&per_page=30&page=1`, {
+        .get(`${url}/search/repositories?q=${targetValue}&per_page=20&page=1`, {
           headers: {
             Authorization: process.env.REACT_APP_API_TOKEN,
           },
@@ -23,6 +26,7 @@ export default function Search({ setIsLoading }) {
           });
           window.localStorage.setItem('repos', JSON.stringify(result));
           setIsLoading(false);
+          dispatch(searchData(targetValue));
         });
     }
   };

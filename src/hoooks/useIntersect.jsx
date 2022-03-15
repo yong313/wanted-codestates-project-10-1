@@ -1,16 +1,56 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { counterData } from '../modules/mainPage';
+// 왜그래 정말
+const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
+  const page = useSelector((state) => state.mainPage.pageCounter);
+  const searchText = useSelector((state) => state.mainPage.searchString);
+  console.log(searchText);
+  const [showList, setShowList] = useState([]);
+  const dispatch = useDispatch();
+  console.log(getSearchRepo);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getApiHandler = (target, page) => {
+    const url = 'https://api.github.com';
+    (async () => {
+      try {
+        const res = await axios.get(
+          `${url}/search/repositories?q=${target}&per_page=20&page=${page}`,
+          {
+            headers: {
+              Authorization: process.env.REACT_APP_API_TOKEN,
+            },
+          },
+        );
+        console.log(res);
+        const result = res.data.items.map((el) => {
+          const fullName = el.full_name.split('/');
+          return { userID: fullName[0], repoName: fullName[1] };
+        });
 
-const useIntersect = (targetRef, getSerchRepo, PAGE_NUMBER) => {
-  const [page, setPage] = useState(PAGE_NUMBER);
-  const showList = getSerchRepo.slice(0, page);
+        setGetSearchRepo([...getSearchRepo, ...result]);
+        dispatch(counterData());
+      } catch (err) {
+        console.log('더 이상 없어욤');
+      }
+    })();
+  };
+
   const callback = useCallback(
-    ([entry], observer) => {
-      if (entry.isIntersecting)
-        setPage(getSerchRepo.length > page ? page + 10 : getSerchRepo.length);
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        console.log('스크롤 시작');
+        getApiHandler(searchText, page);
+      }
     },
-    [page],
+    [getApiHandler, page, searchText],
   );
+
   useEffect(() => {
+    if (Array.isArray(getSearchRepo)) {
+      setShowList(getSearchRepo);
+    }
     if (!targetRef.current) return;
     const observer = new IntersectionObserver(callback, {
       root: null,
@@ -19,7 +59,7 @@ const useIntersect = (targetRef, getSerchRepo, PAGE_NUMBER) => {
     });
     observer.observe(targetRef.current);
     return () => observer.disconnect();
-  }, [targetRef, callback]);
+  }, [targetRef, callback, getSearchRepo]);
   return showList;
 };
 

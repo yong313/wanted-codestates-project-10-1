@@ -8,6 +8,7 @@ import CautionModal from '../components/CautionModal';
 
 import MainTitle from '../components/MainTitle';
 import AddedResult from '../components/AddedResult';
+import SearchResult from '../components/SearchResult';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
