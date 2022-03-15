@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
+  overflow: scroll;
   background-color: #14161a;
 `;
 const Container = styled.div`

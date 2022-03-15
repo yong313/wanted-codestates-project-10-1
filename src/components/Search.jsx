@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { searchData } from '../modules/mainPage';
+import { addSearchList, searchData } from '../modules/mainPage';
 
 export default function Search({ setIsLoading }) {
   const value = useRef(null);
@@ -24,9 +24,9 @@ export default function Search({ setIsLoading }) {
             const fullName = el.full_name.split('/');
             return { userID: fullName[0], repoName: fullName[1] };
           });
-          window.localStorage.setItem('repos', JSON.stringify(result));
-          setIsLoading(false);
+          dispatch(addSearchList(result));
           dispatch(searchData(targetValue));
+          setIsLoading(false);
         });
     }
   };
