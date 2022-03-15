@@ -1,10 +1,11 @@
-export const SET_DATA = 'address/SET_DATA';
-export const AFTER_DATA = 'address/AFTER_DATA';
-export const DELETE_DATA = 'address/DELETE_DATA';
-export const COUNTER_DATA = 'address/COUNTER_DATA';
-export const SEARCH_DATA = 'address/SEARCH_DATA';
-export const MODAL_OPEN = 'address/MODAL_OPEN';
-export const SECOND_MODAL = 'address/SECOND_MODAL';
+export const SET_DATA = 'mainPage/SET_DATA';
+export const AFTER_DATA = 'mainPage/AFTER_DATA';
+export const DELETE_DATA = 'mainPage/DELETE_DATA';
+export const COUNTER_DATA = 'mainPage/COUNTER_DATA';
+export const SEARCH_DATA = 'mainPage/SEARCH_DATA';
+export const MODAL_OPEN = 'mainPage/MODAL_OPEN';
+export const SECOND_MODAL = 'mainPage/SECOND_MODAL';
+export const ADD_SEARCH_LIST = 'mainPage/ADD_SEARCH_LIST';
 
 const initialState = {
   compareData: [],
@@ -14,6 +15,7 @@ const initialState = {
   searchString: '',
   modalOpen: false,
   secondModal: false,
+  searchList: [],
 };
 
 export const setFourModal = () => ({ type: MODAL_OPEN });
@@ -30,6 +32,7 @@ export const deleteData = (deleted) => ({
 });
 export const counterData = () => ({ type: COUNTER_DATA });
 export const searchData = (searchText) => ({ type: SEARCH_DATA, searchText });
+export const addSearchList = (list) => ({ type: ADD_SEARCH_LIST, list });
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -69,6 +72,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         secondModal: !state.secondModal,
+      };
+    case ADD_SEARCH_LIST:
+      return {
+        ...state,
+        searchList: [...action.list],
       };
 
     default:

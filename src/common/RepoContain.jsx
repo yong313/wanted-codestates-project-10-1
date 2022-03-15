@@ -4,6 +4,7 @@ import { ReactComponent as GithubIcon } from '../assets/github_icon.svg';
 import useIntersect from '../hoooks/useIntersect';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  addSearchList,
   searchAfterAdd,
   setFourModal,
   setOverlapModal,
@@ -12,12 +13,17 @@ import {
 const RepoContain = (props) => {
   const targetRef = useRef(null);
   const dispatch = useDispatch();
-  const [getSearchRepo, setGetSearchRepo] = useState(() => {
-    // 저장된 값 가져오기
-    const getRepos = window.localStorage.getItem('repos');
-    const initialValue = JSON.parse(getRepos);
-    return initialValue || '';
-  });
+  // const [getSearchRepo, setGetSearchRepo] = useState(() => {
+  //   // 저장된 값 가져오기
+  //   const getRepos = window.localStorage.getItem('repos');
+  //   const initialValue = JSON.parse(getRepos);
+  //   return initialValue || '';
+  // });
+
+  const getSearchRepo = useSelector((state) => state.mainPage.searchList);
+  const setGetSearchRepo = (data) => {
+    dispatch(addSearchList(data));
+  };
 
   const newMatchRepoList = useIntersect(
     targetRef,
