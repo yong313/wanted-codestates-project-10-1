@@ -38,7 +38,7 @@
 
 3. 등록된 Repository를 삭제할 수 있다.
 
-4. 등록된 각각의 Public Repository의 issue를 한 페이지에서 모아서 볼 수 있다. **
+4. 등록된 각각의 Public Repository의 issue를 한 페이지에서 모아서 볼 수 있다.
     - 각 issue 마다 제목, Repository 명은 필수로 표현되어야 한다. 그 이외의 데이터 중 필요하다고 생각되는 부분은 추가한다.
     - 해당 issue를 클릭하면 Github의 상세 페이지로 이동할 수 있다.
     - **페이지네이션**을 통해서 계속해서 issue를 모아서 볼 수 있다.
