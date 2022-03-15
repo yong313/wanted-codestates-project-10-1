@@ -50,7 +50,9 @@ const RepoContain = (props) => {
               >
                 <LeftBox>
                   <GithubIcon className="github_icon" />
-                  <RepoName>{el.repoName}</RepoName>
+                  <RepoName>
+                    {el.userID} / {el.repoName}
+                  </RepoName>
                 </LeftBox>
                 <RightBox>
                   <AddButton className="add_btn">Add</AddButton>

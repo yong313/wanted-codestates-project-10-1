@@ -32,7 +32,7 @@ const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
         setGetSearchRepo([...getSearchRepo, ...result]);
         dispatch(counterData());
       } catch (err) {
-        console.log('더 이상 없어욤');
+        console.log('더 이상 데이터 없음');
       }
     })();
   };
@@ -40,7 +40,7 @@ const useIntersect = (targetRef, getSearchRepo, setGetSearchRepo) => {
   const callback = useCallback(
     ([entry]) => {
       if (entry.isIntersecting) {
-        console.log('스크롤 시작');
+        console.log('데이터 추가 스크롤 시작');
         getApiHandler(searchText, page);
       }
     },
