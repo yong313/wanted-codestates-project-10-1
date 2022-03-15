@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useMemo,useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
@@ -8,7 +7,7 @@ import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { headers } from '../util/util';
 
-const DISPLAY_CARD_LENGTH = 9; // 한 페이지에 나타낼 인덱스 카드 갯수
+const DISPLAY_CARD_LENGTH = 6; // 한 페이지에 나타낼 인덱스 카드 갯수
 
 export default function Issue() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function Issue() {
   // const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all`;
 
   const URL =
-    'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all';
+    'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all&&per_page=100';
 
   useEffect(() => {
     (async () => {
@@ -104,16 +103,14 @@ export default function Issue() {
       </Nav>
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
-
         {issueDataArr
           .slice(
             DISPLAY_CARD_LENGTH * (currentIndex - 1),
             DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
           )
           .map((dataObj) => (
-            <IssueC key={dataObj.number}  dataObj={dataObj} />
+            <IssueC key={dataObj.number} dataObj={dataObj} />
           ))}
-
       </IssueList>
       <Pagination
         currentIndex={currentIndex}
