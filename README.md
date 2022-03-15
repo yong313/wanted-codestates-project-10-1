@@ -11,7 +11,7 @@
 <br />
 
 ### 기획
-Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D%B4%ED%9E%88%EC%96%B4---10%EC%A1%B0?node-id=0%3A1)
+ [Figma](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D%B4%ED%9E%88%EC%96%B4---10%EC%A1%B0?node-id=0%3A1)
 #### 기능
 - repo 검색, 저장(최대4개), 삭제
 - 저장된 repo 선택시 issue 보기
@@ -72,6 +72,10 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
   <ul>
       <li>검색 및 API 요청 기능 구현</li>
       <li>API 요청 결과 로컬스토리지에 저장</li>
+
+   <li>API요청 응답받기전까지 로딩 스피너구현</li>
+   <li>저장 갯수 초과, 이미 저장된 레포 알림 모달구현 </li>
+
   </ul>
 </details>
 <details>
@@ -98,7 +102,8 @@ Figma [링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D
 <details>
   <summary>전용태</summary>
   <ul>
-    <li>  </li>
+    <li>검색결과로 저장된 로컬스토리지 데이터를 확용하여 결과리스트 구현</li>
+      <li>무한스크롤을 이용한 결과리스트 </li>
   </ul>
 </details>
 
