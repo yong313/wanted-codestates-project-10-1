@@ -6,8 +6,7 @@ import Spinner from '../components/Spinner';
 import Added from '../components/Added';
 import axios from 'axios';
 import CautionModal from '../components/CautionModal';
-
-
+import MainTitle from '../components/MainTitle';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,22 +39,22 @@ export default function Main() {
         {/* view 작업 용 */}
 
         <LeftBox>
-          <Test>
-            <Test2>
-              <Search setIsLoading={setIsLoading} />
-              {/* TestBtn 모달 테스트용  */}
-              <TestBtn onClick={modalHandler} />
-            </Test2>
-            {/* 맵 돌릴 구간 */}
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <Test3>
-                <RepoContain />
-              </Test3>
-            )}
-          </Test>
+          <Test2>
+            <MainTitle content="Github Repositories Searcher 🔍" />
+            <Search setIsLoading={setIsLoading} />
+            {/* TestBtn 모달 테스트용  */}
+            <TestBtn onClick={modalHandler} />
+          </Test2>
+          {/* 맵 돌릴 구간 */}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Test3>
+              <RepoContain />
+            </Test3>
+          )}
         </LeftBox>
+        <MainTitle content="Search In Repository 😎" />
         {/* view 작업 용 */}
         <RightBox>
           <Added />
@@ -67,38 +66,38 @@ export default function Main() {
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1920px;
+  max-width: 1200px;
   height: 100%;
   display: flex;
+  padding-top: 8rem;
 `;
 
 const LeftBox = styled.div`
+  /* background-color: pink; */
   width: 50%;
-  height: auto;
-  max-height: 100vh;
-  overflow: scroll;
-`;
-
-const Test = styled.div`
-  width: 100%;
-  height: 100%;
+  height: 90vh;
+  max-height: 90%;
+  padding: 0 2.5rem;
 `;
 
 const Test2 = styled.div`
   width: 100%;
-  height: 20%;
 `;
 
 const Test3 = styled.div`
+  overflow: scroll;
+  margin-top: 5rem;
   width: 100%;
   height: 80%;
 `;
 
 const RightBox = styled.div`
+  background-color: pink;
   width: 50%;
   height: auto;
   display: flex;
   flex-direction: row;
+  padding: 0 2.5rem;
 `;
 
 const TestBtn = styled.button`
