@@ -2,7 +2,7 @@
 
 ## 🌈 &nbsp; wanted-codestates-project-10-1
 
-### 📎 &nbsp; [과제링크](https://www.figma.com/file/bUdTDckvzPvAu71npymZm1/%ED%8E%98%EC%9D%B4%ED%9E%88%EC%96%B4---10%EC%A1%B0?node-id=0%3A1)
+### 📎 &nbsp; [과제링크](https://gallant-shockley-d3e212.netlify.app/)
 
 <div align="center">
 <img width="300px" src=""/>
