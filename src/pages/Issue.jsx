@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
@@ -8,6 +9,7 @@ import { headers } from '../util/util';
 const DISPLAY_CARD_LENGTH = 9;
 
 export default function Issue() {
+  const navigate = useNavigate();
   const datas = useMemo(() => [], []);
   const [issueDataArr, setIssueDataArr] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -84,7 +86,7 @@ export default function Issue() {
   return (
     <Container>
       <Nav>
-        <Back> {'<'} Home</Back>
+        <Back onClick={() => navigate('/')}> {'<'} Home</Back>
         <Buttons>
           {['All', 'Open', 'Closed'].map((text, idx) => (
             <Button
@@ -124,6 +126,7 @@ const Back = styled.div`
   font-weight: 900;
   font-size: 3.5rem;
   line-height: 4.1rem;
+  cursor: pointer;
   color: #00aaee;
 `;
 const Buttons = styled.div`

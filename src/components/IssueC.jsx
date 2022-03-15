@@ -26,6 +26,7 @@ const Container = styled.div`
   box-shadow: 0px 2px 2rem rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   padding: 3.6rem;
+  cursor: pointer;
 `;
 const Title = styled.h1`
   font-family: 'Roboto';
