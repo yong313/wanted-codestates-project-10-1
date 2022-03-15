@@ -11,16 +11,12 @@ function AddedResult() {
   const handleDltClick = (e) => {
     e.stopPropagation();
     const target = e.target.id;
-    let clickedData = addRepositories.filter(
-      (current, i) => Number(target) === i,
-    );
     let leftData = addRepositories.filter((current, i) => Number(target) !== i);
     dispatch(deleteData(leftData));
   };
-  const handleSetLocalStorage = (e) => {
-    const target = Number(e.target.id);
+  const handleSetLocalStorage = (e, idx) => {
+    const target = Number(idx);
     const clickedData = addRepositories[target];
-    console.log(e);
     window.localStorage.setItem('selectedRepos', JSON.stringify(clickedData));
     navigate('/issue');
   };
@@ -30,10 +26,11 @@ function AddedResult() {
         addRepositories.map((repo, index) => {
           return (
             <RepoContainer
+              key={index}
               repo={repo}
               id={index}
               handleDltClick={(e) => handleDltClick(e)}
-              handleSetLocalStorage={(e) => handleSetLocalStorage(e)}
+              handleSetLocalStorage={(e) => handleSetLocalStorage(e, index)}
               button={'REMOVE'}
               selectRepo
             />

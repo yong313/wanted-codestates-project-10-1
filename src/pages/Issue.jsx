@@ -16,38 +16,40 @@ export default function Issue() {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
   const [clickedText, setClickedText] = useState('All');
-  /* data 연동 시 받아올 형식 */
-
-  // const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
-  // const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all`;
-
-  const URL =
-    'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all&&per_page=100';
-
+  const [showWarnings, setShowWarnings] = useState('');
+  const { userID, repoName } = JSON.parse(
+    window.localStorage.getItem('selectedRepos'),
+  );
+  console.log(userID, repoName);
+  const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all&&per_page=100`;
   useEffect(() => {
     (async () => {
       const { data: dataArr } = await axios.get(URL, headers);
-      dataArr.forEach((data) => {
-        const {
-          title,
-          repository_url,
-          created_at,
-          state,
-          html_url,
-          number,
-          user: { id, avatar_url },
-        } = data;
-        datas.push({
-          title,
-          repository_url,
-          created_at,
-          state,
-          html_url,
-          number,
-          user: { id, avatar_url },
+      if (dataArr.length) {
+        dataArr.forEach((data) => {
+          const {
+            title,
+            repository_url,
+            created_at,
+            state,
+            html_url,
+            number,
+            user: { id, avatar_url },
+          } = data;
+          datas.push({
+            title,
+            repository_url,
+            created_at,
+            state,
+            html_url,
+            number,
+            user: { id, avatar_url },
+          });
         });
-      });
-      setIssueDataArr(datas);
+        setIssueDataArr(datas);
+      } else {
+        setShowWarnings('no issue');
+      }
     })();
   }, []);
 
@@ -101,25 +103,30 @@ export default function Issue() {
           ))}
         </Buttons>
       </Nav>
-      <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
+      <P>{userID + ' / ' + repoName}</P>
       <IssueList>
-        {issueDataArr
-          .slice(
-            DISPLAY_CARD_LENGTH * (currentIndex - 1),
-            DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
-          )
-          .map((dataObj) => (
-            <IssueC key={dataObj.number} dataObj={dataObj} />
-          ))}
+        {issueDataArr.length ? (
+          issueDataArr
+            .slice(
+              DISPLAY_CARD_LENGTH * (currentIndex - 1),
+              DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
+            )
+            .map((dataObj) => <IssueC key={dataObj.number} dataObj={dataObj} />)
+        ) : (
+          <ShowWarnings>{showWarnings}</ShowWarnings>
+        )}
       </IssueList>
-      <Pagination
-        currentIndex={currentIndex}
-        numOfPages={numOfPages}
-        changePageIndex={changePageIndex}
-      />
+      {issueDataArr.length ? (
+        <Pagination
+          currentIndex={currentIndex}
+          numOfPages={numOfPages}
+          changePageIndex={changePageIndex}
+        />
+      ) : null}
     </Container>
   );
 }
+
 const Container = styled.div`
   width: 100%;
   height: 1080px;
@@ -182,6 +189,13 @@ const P = styled.div`
   line-height: 4.7rem;
   margin-top: 6.9rem;
   color: #eee;
+`;
+const ShowWarnings = styled.p`
+  width: 120rem;
+  font-size: 3rem;
+  color: white;
+  font-weight: 900;
+  text-align: center;
 `;
 const IssueList = styled.div`
   width: 100%;

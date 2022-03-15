@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
 export default function CautionModal({ content, setShowModal }) {
+  const dispatch = useDispatch();
   useEffect(() => {
-    const timeOut = setTimeout(() => setShowModal(false), 1000);
+    const timeOut = setTimeout(() => dispatch(setShowModal()), 1250);
     return () => {
       clearTimeout(timeOut);
     };
-  }, [setShowModal]);
+  }, [dispatch, setShowModal]);
 
   return (
     <>
@@ -40,7 +42,7 @@ const Container = styled.div`
   border-radius: 20px;
   background-color: #fff;
   padding: 111px 0;
-  animation: ${rotate} 1.1s 1;
+  animation: ${rotate} 1.35s 1;
 `;
 const Content = styled.div`
   width: 100%;
@@ -58,5 +60,5 @@ const Bg = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  animation: ${rotate} 1.1s 1;
+  animation: ${rotate} 1.35s 1;
 `;
