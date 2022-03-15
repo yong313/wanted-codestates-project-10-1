@@ -33,7 +33,7 @@ export default function Search({ setIsLoading }) {
         ref={value}
         // onChange={inputHandler}
         onKeyPress={inputHandler}
-        placeholder="Github 이슈를 검색해주세요.✨"
+        placeholder="Github Repository를 검색해주세요.✨"
       />
     </Container>
   );
