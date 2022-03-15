@@ -18,8 +18,8 @@ export default function Issue() {
   const [clickedText, setClickedText] = useState('All');
   /* data 연동 시 받아올 형식 */
 
-  //   const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
-  //   const URL = `https://api.github.com/repos/${userId}/${repoName}/issues?state=all`;
+  // const {userID,repoName} = JSON.parse(window.localStorage.getItem('repos'));
+  // const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all`;
 
   const URL =
     'https://api.github.com/repos/hinyc/wanted-codestates-project-10-6/issues?state=all';
@@ -33,6 +33,8 @@ export default function Issue() {
           repository_url,
           created_at,
           state,
+          html_url,
+          number,
           user: { id, avatar_url },
         } = data;
         datas.push({
@@ -40,6 +42,8 @@ export default function Issue() {
           repository_url,
           created_at,
           state,
+          html_url,
+          number,
           user: { id, avatar_url },
         });
       });
@@ -90,6 +94,7 @@ export default function Issue() {
         <Buttons>
           {['All', 'Open', 'Closed'].map((text, idx) => (
             <Button
+              key={idx}
               text={text === clickedText}
               onClick={() => setOnClick(text)}
             >
@@ -101,7 +106,7 @@ export default function Issue() {
       <P>hinyc/wanted-codestates-project-10-8 ISSUES</P>
       <IssueList>
         {issueDataArr.map((dataObj) => (
-          <IssueC dataObj={dataObj} />
+          <IssueC key={dataObj.number} dataObj={dataObj} />
         ))}
       </IssueList>
       <Pagination issues={issues} />

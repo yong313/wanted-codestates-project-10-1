@@ -6,10 +6,11 @@ export default function IssueC({ dataObj }) {
     repository_url,
     created_at,
     state,
+    html_url,
     user: { avatar_url },
   } = dataObj;
   return (
-    <Container state={state}>
+    <Container state={state} url={html_url}>
       <Title>{title}</Title>
       <RepoName>{repository_url}</RepoName>
       <RegistDate>{created_at}</RegistDate>
@@ -18,7 +19,9 @@ export default function IssueC({ dataObj }) {
     </Container>
   );
 }
-const Container = styled.div`
+const Container = styled.a.attrs((props) => ({
+  href: props.url,
+}))`
   position: relative;
   width: 36.748rem;
   height: 22.049rem;
