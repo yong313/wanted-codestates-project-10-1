@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { headers } from '../util/util';
 
-const DISPLAY_CARD_LENGTH = 9;
+const DISPLAY_CARD_LENGTH = 9; // 한 페이지에 나타낼 인덱스 카드 갯수
 
 export default function Issue() {
   const datas = useMemo(() => [], []);
@@ -54,10 +54,11 @@ export default function Issue() {
     setCurrentIndex(1);
   }, [issueDataArr]);
 
-  const changePageIndex = (newIndex) => {
+  const changePageIndex = useCallback((newIndex) => {
     // 클릭된 페이지 활성화
     setCurrentIndex(newIndex);
-  };
+  }, []);
+
   const chageData = (text) => {
     const newDatas = datas.filter((obj) => {
       switch (text) {
