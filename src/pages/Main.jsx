@@ -3,38 +3,31 @@ import styled from 'styled-components';
 import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
-import Added from '../components/Added';
 import CautionModal from '../components/CautionModal';
 
 import MainTitle from '../components/MainTitle';
 import AddedResult from '../components/AddedResult';
-import SearchResult from '../components/SearchResult';
+import { useSelector } from 'react-redux';
+import { setFourModal, setOverlapModal } from '../modules/mainPage';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
-  const [showFourModal, setShowFourModal] = useState(false);
-  const [showAlreadyModal, setShowAlreadyModal] = useState(false);
 
-  const modalHandler = () => {
-    // 4개 이상 등록안되요
-    // setShowFourModal(true);
-
-    // 이미등록되있어요
-    setShowAlreadyModal(true);
-  };
+  const showFourModal = useSelector((state) => state.mainPage.modalOpen);
+  const showAlreadyModal = useSelector((state) => state.mainPage.secondModal);
 
   return (
     <>
       {showFourModal && (
         <CautionModal
           content="4개 이상 저장은 안돼요 😢"
-          setShowModal={setShowFourModal}
+          setShowModal={setFourModal}
         />
       )}
       {showAlreadyModal && (
         <CautionModal
           content="이미 저장 되었습니다 😢"
-          setShowModal={setShowAlreadyModal}
+          setShowModal={setOverlapModal}
         />
       )}
       <Container>

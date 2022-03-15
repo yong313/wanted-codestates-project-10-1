@@ -4,7 +4,6 @@ import GlobalStyles from './GlobalStyles';
 import Main from './pages/Main';
 import styled from 'styled-components';
 import Issue from './pages/Issue';
-import Sub from './pages/Sub';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/sub" element={<Sub />} />
             <Route path="/issue" element={<Issue />} />
           </Routes>
         </Container>
