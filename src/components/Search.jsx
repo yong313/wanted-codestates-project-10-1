@@ -26,6 +26,7 @@ export default function Search({ setIsLoading }) {
         });
     }
   };
+
   return (
     <Container>
       <Title>Github Repositories Searcher 🔍</Title>

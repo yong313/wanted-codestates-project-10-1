@@ -7,8 +7,6 @@ import Added from '../components/Added';
 import axios from 'axios';
 import CautionModal from '../components/CautionModal';
 
-
-
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
   const [showFourModal, setShowFourModal] = useState(false);
@@ -37,8 +35,6 @@ export default function Main() {
         />
       )}
       <Container>
-        {/* view 작업 용 */}
-
         <LeftBox>
           <Test>
             <Test2>
@@ -46,17 +42,9 @@ export default function Main() {
               {/* TestBtn 모달 테스트용  */}
               <TestBtn onClick={modalHandler} />
             </Test2>
-            {/* 맵 돌릴 구간 */}
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <Test3>
-                <RepoContain />
-              </Test3>
-            )}
+            {isLoading ? <Spinner /> : <RepoContain />}
           </Test>
         </LeftBox>
-        {/* view 작업 용 */}
         <RightBox>
           <Added />
         </RightBox>
@@ -87,11 +75,6 @@ const Test = styled.div`
 const Test2 = styled.div`
   width: 100%;
   height: 20%;
-`;
-
-const Test3 = styled.div`
-  width: 100%;
-  height: 80%;
 `;
 
 const RightBox = styled.div`
