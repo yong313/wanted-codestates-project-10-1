@@ -31,6 +31,13 @@ const datas = [
 ];
 
 function Added() {
+  const [getSearchRepo, setGetSearchRepo] = useState(() => {
+    // 저장된 값 가져오기
+    const getRepos = localStorage.getItem('repos');
+    const initialValue = JSON.parse(getRepos);
+    return initialValue || '';
+  });
+  const [unChangeData, setUnChangeData] = useState(datas);
   const [dummyData, setDummyData] = useState(datas);
   const [addList, setAddList] = useState([]);
 
@@ -52,8 +59,10 @@ function Added() {
       (a) => a.name !== addList[e.target.id].name,
     );
     setAddList(deleteData);
-    dummyData.push(clickedData[0]);
-    const reJoinData = datas.filter((a) => dummyData.some((b) => b === a));
+    setDummyData(dummyData.push(clickedData[0]));
+    const reJoinData = unChangeData.filter((a) =>
+      dummyData.some((b) => b === a),
+    );
     setDummyData(reJoinData);
   };
 
@@ -63,7 +72,7 @@ function Added() {
       <DataListContainer>
         {dummyData.map((data, index) => {
           return (
-            <DataList id={index} key={index}>
+            <DataList id={index} key={index} data={data}>
               <h1>{data.name}</h1>
               <span>{data.email}</span>
               <span>{data.date}</span>
@@ -100,7 +109,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: white; */
 `;
 const DataListContainer = styled.div`
   margin-bottom: 20px;
