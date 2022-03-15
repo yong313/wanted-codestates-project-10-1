@@ -38,17 +38,13 @@ export default function Main() {
       )}
       <Container>
         <LeftBox>
-          <Test2>
-            <MainTitle content="Github Repositories Searcher 🔍" />
-            <Search setIsLoading={setIsLoading} />
-            {/* TestBtn 모달 테스트용  */}
-            <TestBtn onClick={modalHandler} />
-          </Test2>
+          <MainTitle content="Github Repositories Searcher 🔍" />
+          <Search setIsLoading={setIsLoading} />
+
           {/* 맵 돌릴 구간 */}
-          {isLoading ? <Spinner /> : <RepoContain />}
+          <ResultBox>{isLoading ? <Spinner /> : <RepoContain />}</ResultBox>
         </LeftBox>
         {/* view 작업 용 */}
-
         <RightBox>
           <MainTitle content="Search In Repository 😎" />
           <Added />
@@ -71,26 +67,21 @@ const LeftBox = styled.div`
   width: 50%;
   height: 90vh;
   max-height: 90%;
-  padding: 0 2.5rem;
+  padding-right: 50px;
 `;
 
-const Test2 = styled.div`
+const ResultBox = styled.div`
   width: 100%;
+  height: 670px;
+  margin-top: 30px;
+  overflow: scroll;
 `;
 
 const RightBox = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
   width: 50%;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 0 2.5rem;
-`;
-
-const TestBtn = styled.button`
-  position: fixed;
-  top: 0px;
-  width: 100px;
-  height: 100px;
-  background-color: yellow;
+  /* display: flex;
+  flex-direction: column; */
+  padding-left: 50px;
 `;
