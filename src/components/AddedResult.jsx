@@ -14,9 +14,12 @@ function AddedResult() {
     let leftData = addRepositories.filter((current, i) => Number(target) !== i);
     dispatch(deleteData(leftData));
   };
-  const handleSetLocalStorage = (e) => {
-    const target = Number(e.target.id);
+  const handleSetLocalStorage = (e, idx) => {
+    console.log(addRepositories);
+    const target = Number(idx);
+    console.log(target);
     const clickedData = addRepositories[target];
+    console.log(clickedData);
     window.localStorage.setItem('selectedRepos', JSON.stringify(clickedData));
     navigate('/issue');
   };
@@ -30,7 +33,7 @@ function AddedResult() {
               repo={repo}
               id={index}
               handleDltClick={(e) => handleDltClick(e)}
-              handleSetLocalStorage={(e) => handleSetLocalStorage(e)}
+              handleSetLocalStorage={(e) => handleSetLocalStorage(e, index)}
               button={'REMOVE'}
               selectRepo
             />
