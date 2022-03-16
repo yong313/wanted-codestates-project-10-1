@@ -17,7 +17,7 @@ export default function IssueC({ dataObj }) {
     const mDiff = currDate.getMonth() - createdDate.getMonth();
     const dDiff = currDate.getDate() - createdDate.getDate();
     const date = parseInt((yDiff * 365 + mDiff * 30 + dDiff) / 30);
-    return date ? date + ' month' : dDiff + ' day';
+    return date ? date + 'month' : dDiff + ' day';
   };
 
   return (
@@ -34,12 +34,13 @@ const Container = styled.a.attrs((props) => ({
   href: props.url,
 }))`
   position: relative;
-  width: 36.748rem;
-  height: 22.049rem;
+  width: 100%;
+  min-width: 36.7rem;
+  height: 100%;
   background: ${({ state }) => (state === 'open' ? '#ffffff' : '#4f5864')};
   box-shadow: 0px 2px 2rem rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
-  padding: 3.6rem;
+  padding: 2.5rem;
   cursor: pointer;
 `;
 const Title = styled.h1`
@@ -47,7 +48,6 @@ const Title = styled.h1`
   font-style: normal;
   font-weight: 900;
   font-size: 2.5rem;
-  line-height: 2.9rem;
   font-size: 2.2rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;

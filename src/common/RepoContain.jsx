@@ -13,12 +13,6 @@ import {
 const RepoContain = (props) => {
   const targetRef = useRef(null);
   const dispatch = useDispatch();
-  // const [getSearchRepo, setGetSearchRepo] = useState(() => {
-  //   // 저장된 값 가져오기
-  //   const getRepos = window.localStorage.getItem('repos');
-  //   const initialValue = JSON.parse(getRepos);
-  //   return initialValue || '';
-  // });
 
   const getSearchRepo = useSelector((state) => state.mainPage.searchList);
   const setGetSearchRepo = (data) => {
@@ -92,20 +86,25 @@ const RepoContain = (props) => {
 
 const InfinityScrollBox = styled.div`
   width: 100%;
-  height: 80%;
+  height: 100%;
   overflow: scroll;
 `;
 
 const RepoContainBox = styled.div`
   width: 100%;
-  height: 10rem;
-  padding: 2rem 3rem;
+  height: 6.4rem;
+  padding: 1.2rem 2.5rem;
   margin: 2rem 0;
   border-radius: 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+
+  .github_icon {
+    width: 26px;
+    height: 26px;
+  }
 
   &:not(:hover) {
     background-color: #4f5864;
@@ -131,6 +130,10 @@ const RepoContainBox = styled.div`
       color: #fff;
     }
   }
+
+  :first-child {
+    margin-top: 0;
+  }
 `;
 
 const LeftBox = styled.div`
@@ -145,9 +148,11 @@ const LeftBox = styled.div`
 `;
 
 const RepoName = styled.p`
-  font-size: 3rem;
+  font-size: 22.5px;
   font-weight: bold;
-  margin-left: 0.8rem;
+  padding-top: 2px;
+  margin-left: 8px;
+  overflow: hidden;
 `;
 
 const RightBox = styled(LeftBox)`
@@ -157,11 +162,10 @@ const RightBox = styled(LeftBox)`
 `;
 
 const AddButton = styled.button`
-  width: auto;
-  height: auto;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  font-size: 3rem;
+  width: 8rem;
+  height: 4rem;
+  border-radius: 10px;
+  font-size: 22px;
   font-weight: bold;
   color: #fff;
   background-color: #ccc;

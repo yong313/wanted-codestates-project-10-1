@@ -80,7 +80,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8rem 0;
 `;
 const ButtonWrapper = styled.div`
   width: 6rem;
@@ -92,7 +91,7 @@ const Button = styled.button`
   width: 6rem;
   height: 3.5rem;
   color: #00aaee;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   cursor: pointer;
 `;
@@ -101,15 +100,15 @@ const PagesWrapper = styled.ul`
   display: flex;
 
   li {
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     background-color: #4f5864;
     color: #ccc;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 600;
     line-height: 3.5rem;
     cursor: pointer;

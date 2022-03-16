@@ -49,13 +49,15 @@ const Input = styled.input`
   width: 100%;
   height: 6.4rem;
   border-radius: 20px;
-  font-size: 2.5rem;
+  font-size: 22.5px;
+  font-weight: bold;
   padding: 0 23px;
   outline: none;
-  margin-top: 5rem;
+  margin-bottom: 5rem;
 
   ::placeholder {
     color: #cccccc;
+    font-size: 22.5px;
     font-weight: 700;
   }
 `;

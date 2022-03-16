@@ -31,7 +31,7 @@ function AddedResult() {
               id={index}
               handleDltClick={(e) => handleDltClick(e)}
               handleSetLocalStorage={(e) => handleSetLocalStorage(e, index)}
-              button={'REMOVE'}
+              button={'Delete'}
               selectRepo
             />
           );
