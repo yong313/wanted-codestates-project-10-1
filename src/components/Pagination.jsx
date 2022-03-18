@@ -80,6 +80,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 4rem 0;
 `;
 const ButtonWrapper = styled.div`
   width: 6rem;

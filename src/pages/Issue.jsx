@@ -5,6 +5,7 @@ import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { headers } from '../util/util';
+import Spinner from '../components/Spinner';
 
 const DISPLAY_CARD_LENGTH = 6; // 한 페이지에 나타낼 인덱스 카드 갯수
 
@@ -16,12 +17,15 @@ export default function Issue() {
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
   const [clickedText, setClickedText] = useState('All');
   const [showWarnings, setShowWarnings] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const { userID, repoName } = JSON.parse(
     window.localStorage.getItem('selectedRepos'),
   );
   console.log(userID, repoName);
   const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all&&per_page=100`;
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
       const { data: dataArr } = await axios.get(URL, headers);
       if (dataArr.length) {
@@ -46,6 +50,7 @@ export default function Issue() {
           });
         });
         setIssueDataArr(datas);
+        setIsLoading(false);
       } else {
         setShowWarnings('no issue');
       }
@@ -103,8 +108,31 @@ export default function Issue() {
         </Buttons>
       </Nav>
       <P>{userID + ' / ' + repoName}</P>
-      <IssueList>
-        {issueDataArr.length ? (
+      {isLoading ? (
+        <SpinnerWrapper>
+          <Spinner />
+        </SpinnerWrapper>
+      ) : (
+        <IssueList>
+          {issueDataArr.length ? (
+            issueDataArr
+              .slice(
+                DISPLAY_CARD_LENGTH * (currentIndex - 1),
+                DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
+              )
+              .map((dataObj) => (
+                <IssueC key={dataObj.number} dataObj={dataObj} />
+              ))
+          ) : (
+            <ShowWarnings>{showWarnings}</ShowWarnings>
+          )}
+        </IssueList>
+      )}
+
+      {/* <IssueList>
+        {isLoading ? (
+          <Spinner />
+        ) : issueDataArr.length ? (
           issueDataArr
             .slice(
               DISPLAY_CARD_LENGTH * (currentIndex - 1),
@@ -114,7 +142,7 @@ export default function Issue() {
         ) : (
           <ShowWarnings>{showWarnings}</ShowWarnings>
         )}
-      </IssueList>
+      </IssueList> */}
       {issueDataArr.length ? (
         <Pagination
           currentIndex={currentIndex}
@@ -133,11 +161,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-start;
   background-color: #14161a;
   padding: 8rem 0 6rem 0;
   @media (min-width: 1440px) {
-    padding: 4rem 0;
+    // padding: 4rem 0;
   }
   @media (min-width: 1920px) {
     padding: 8rem 0 6rem 0;
@@ -197,7 +226,7 @@ const Button = styled.button`
 const P = styled.div`
   font-weight: 900;
   font-size: 4rem;
-  margin-top: 0rem;
+  margin: 5rem 0;
   color: #eee;
   width: 100%;
 `;
@@ -219,4 +248,11 @@ const IssueList = styled.div`
     gap: 2rem;
     padding: 3rem 2rem 4rem 2rem;
   }
+`;
+const SpinnerWrapper = styled.div`
+  width: 100%;
+  height: 49rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
