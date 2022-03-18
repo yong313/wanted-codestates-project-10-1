@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import styled, { css } from 'styled-components';
 import IssueC from '../components/IssueC';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { headers } from '../util/util';
+import Spinner from '../components/Spinner';
 
 const DISPLAY_CARD_LENGTH = 6; // 한 페이지에 나타낼 인덱스 카드 갯수
 
@@ -17,12 +17,15 @@ export default function Issue() {
   const [numOfPages, setNumOfPages] = useState(0); // 페이지네이션 인덱스 길이(갯수)
   const [clickedText, setClickedText] = useState('All');
   const [showWarnings, setShowWarnings] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const { userID, repoName } = JSON.parse(
     window.localStorage.getItem('selectedRepos'),
   );
   console.log(userID, repoName);
   const URL = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all&&per_page=100`;
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
       const { data: dataArr } = await axios.get(URL, headers);
       if (dataArr.length) {
@@ -47,6 +50,7 @@ export default function Issue() {
           });
         });
         setIssueDataArr(datas);
+        setIsLoading(false);
       } else {
         setShowWarnings('no issue');
       }
@@ -104,8 +108,31 @@ export default function Issue() {
         </Buttons>
       </Nav>
       <P>{userID + ' / ' + repoName}</P>
-      <IssueList>
-        {issueDataArr.length ? (
+      {isLoading ? (
+        <SpinnerWrapper>
+          <Spinner />
+        </SpinnerWrapper>
+      ) : (
+        <IssueList>
+          {issueDataArr.length ? (
+            issueDataArr
+              .slice(
+                DISPLAY_CARD_LENGTH * (currentIndex - 1),
+                DISPLAY_CARD_LENGTH * currentIndex - 1 + 1,
+              )
+              .map((dataObj) => (
+                <IssueC key={dataObj.number} dataObj={dataObj} />
+              ))
+          ) : (
+            <ShowWarnings>{showWarnings}</ShowWarnings>
+          )}
+        </IssueList>
+      )}
+
+      {/* <IssueList>
+        {isLoading ? (
+          <Spinner />
+        ) : issueDataArr.length ? (
           issueDataArr
             .slice(
               DISPLAY_CARD_LENGTH * (currentIndex - 1),
@@ -115,7 +142,7 @@ export default function Issue() {
         ) : (
           <ShowWarnings>{showWarnings}</ShowWarnings>
         )}
-      </IssueList>
+      </IssueList> */}
       {issueDataArr.length ? (
         <Pagination
           currentIndex={currentIndex}
@@ -129,28 +156,41 @@ export default function Issue() {
 
 const Container = styled.div`
   width: 100%;
-  height: 1080px;
+  max-width: 1200px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: space-between;
+  justify-content: flex-start;
   background-color: #14161a;
+  padding: 8rem 0 6rem 0;
+  @media (min-width: 1440px) {
+    // padding: 4rem 0;
+  }
+  @media (min-width: 1920px) {
+    padding: 8rem 0 6rem 0;
+  }
 `;
 const Nav = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  margin-top: 12.4rem;
 `;
 const Back = styled.div`
-  width: 12.6rem;
-  height: 4.1rem;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 900;
   font-size: 3.5rem;
-  line-height: 4.1rem;
-  cursor: pointer;
   color: #00aaee;
+  cursor: pointer;
+  width: 50%;
 `;
 const Buttons = styled.div`
   box-sizing: border-box;
   border-radius: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
 `;
 const Button = styled.button`
   color: #ffffff;
@@ -186,9 +226,9 @@ const Button = styled.button`
 const P = styled.div`
   font-weight: 900;
   font-size: 4rem;
-  line-height: 4.7rem;
-  margin-top: 6.9rem;
+  margin: 5rem 0;
   color: #eee;
+  width: 100%;
 `;
 const ShowWarnings = styled.p`
   width: 120rem;
@@ -202,6 +242,17 @@ const IssueList = styled.div`
   display: grid;
   gap: 4.5rem;
   justify-items: center;
-  margin-top: 5.5rem;
   grid-template-columns: repeat(3, 1fr);
+
+  @media (min-width: 1440px) {
+    gap: 2rem;
+    padding: 3rem 2rem 4rem 2rem;
+  }
+`;
+const SpinnerWrapper = styled.div`
+  width: 100%;
+  height: 49rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -21,7 +21,11 @@ const RepoContainer = ({
       >
         <LeftBox>
           <GithubIcon className="github_icon" />
-          <RepoName>{selectRepo ? repo.repoName : data.repoName}</RepoName>
+          <RepoName>
+            {selectRepo
+              ? `${repo.userID} / ${repo.repoName}`
+              : `${data.userID} / ${data.repoName}`}
+          </RepoName>
         </LeftBox>
         <RightBox>
           <AddButton
@@ -39,38 +43,20 @@ const RepoContainer = ({
 
 const RepoContainBox = Styled.div`
   width: 100%;
-  height: 10rem;
-  padding: 2rem 3rem;
-  margin: 2rem 0;
+  height: 6.4rem;
+  padding: 1.2rem 2.5rem;
+  margin-bottom: 3rem;
   border-radius: 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-color: #fff;
   cursor: pointer;
-
-  &:not(:hover) {
-    background-color: #4F5864;
-    color: #ccc;
-    transition: all 0.25s ease;
-
-    .github_icon {
-      fill: #ccc;
-    }
-  }
-
-  &:hover {
-    background-color: #fff;
-    color: #14161A;
-    transition: all 0.25s ease;
-
-    .github_icon {
-      fill: #14161A;
-    }
-
-    .add_btn {
-      background-color: #00ACEE;
-      color: #fff;
-    }
+  
+  .github_icon {
+    width: 26px;
+    height: 26px;
+    fill: #14161a;
   }
 `;
 
@@ -80,12 +66,17 @@ const LeftBox = Styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const RepoName = Styled.p`
-  font-size: 3rem;
+  font-size: 22.5px;
   font-weight: bold;
-  margin-left: 0.8rem;
+  padding-top: 2px;
+  margin-left: 8px;
+  overflow: hidden;
 `;
 
 const RightBox = Styled(LeftBox)`
@@ -95,14 +86,13 @@ const RightBox = Styled(LeftBox)`
 `;
 
 const AddButton = Styled.button`
-  width: auto;
-  height: auto;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  font-size: 3rem;
+  width: 10rem;
+  height: 4rem;
+  border-radius: 10px;
+  font-size: 22px;
   font-weight: bold;
   color: #fff;
-  background-color: #ccc;
+  background-color: #EB2D4C;
 `;
 
 export default RepoContainer;

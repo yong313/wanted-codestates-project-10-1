@@ -4,7 +4,6 @@ import RepoContain from '../common/RepoContain';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import CautionModal from '../components/CautionModal';
-
 import MainTitle from '../components/MainTitle';
 import AddedResult from '../components/AddedResult';
 import { useSelector } from 'react-redux';
@@ -32,15 +31,14 @@ export default function Main() {
       )}
       <Container>
         <LeftBox>
-          <MainTitle content="Github Repositories Searcher 🔍" />
-          <Search setIsLoading={setIsLoading} />
-
-          {/* 맵 돌릴 구간 */}
+          <SearchBox>
+            <MainTitle content="Github Repositories Searcher 🔍" />
+            <Search setIsLoading={setIsLoading} />
+          </SearchBox>
           <ResultBox>{isLoading ? <Spinner /> : <RepoContain />}</ResultBox>
         </LeftBox>
-        {/* view 작업 용 */}
         <RightBox>
-          <MainTitle content="Search In Repository 😎" />
+          <MainTitle content="Saved Repositories 😎" />
           <AddedResult />
         </RightBox>
       </Container>
@@ -51,31 +49,43 @@ export default function Main() {
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
-  height: 100%;
+  height: 100vh;
   display: flex;
-  padding-top: 8rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 4rem;
 `;
 
 const LeftBox = styled.div`
-  /* background-color: pink; */
   width: 50%;
-  height: 90vh;
+  height: 100%;
   max-height: 90%;
   padding-right: 50px;
 `;
 
+const SearchBox = styled.div`
+  width: 100%;
+  height: auto;
+`;
+
 const ResultBox = styled.div`
   width: 100%;
-  height: 670px;
-  margin-top: 30px;
+  height: 90%;
   overflow: scroll;
+
+  @media (min-width: 1440px) {
+    height: 77%;
+  }
+  @media (min-width: 1920px) {
+    height: 82%;
+  }
 `;
 
 const RightBox = styled.div`
-  /* background-color: pink; */
   width: 50%;
-  height: auto;
-  /* display: flex;
-  flex-direction: column; */
+  height: 100%;
   padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;

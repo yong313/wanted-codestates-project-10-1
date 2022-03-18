@@ -33,30 +33,30 @@ const Loader = styled.div`
   font-size: 10px;
   margin: 50px auto;
   text-indent: -9999em;
-  width: 11em;
-  height: 11em;
+  width: 4.8em;
+  height: 4.8em;
   border-radius: 50%;
-  background: #ffffff;
+  background: #00acee;
   background: -moz-linear-gradient(
     left,
-    #ffffff 10%,
-    rgba(255, 255, 255, 0) 42%
+    #00acee 10%,
+    rgba(204, 204, 204, 1) 42%
   );
   background: -webkit-linear-gradient(
     left,
-    #ffffff 10%,
-    rgba(255, 255, 255, 0) 42%
+    #00acee 10%,
+    rgba(204, 204, 204, 1) 42%
   );
-  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #00acee 10%, rgba(204, 204, 204, 1) 42%);
   background: -ms-linear-gradient(
     left,
-    #ffffff 10%,
-    rgba(255, 255, 255, 0) 42%
+    #00acee 10%,
+    rgba(204, 204, 204, 1) 42%
   );
   background: linear-gradient(
     to right,
-    #ffffff 10%,
-    rgba(255, 255, 255, 0) 42%
+    #00acee 10%,
+    rgba(204, 204, 204, 1) 42%
   );
   position: relative;
   -webkit-animation: ${load3} 1.4s infinite linear;
@@ -67,7 +67,7 @@ const Loader = styled.div`
   :before {
     width: 50%;
     height: 50%;
-    background: #ffffff;
+    background: #00acee;
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;

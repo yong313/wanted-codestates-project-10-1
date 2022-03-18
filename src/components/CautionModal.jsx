@@ -37,18 +37,19 @@ const rotate = keyframes`
 
 const Container = styled.div`
   position: fixed;
-  width: 700px;
-  height: 270px;
+  width: 38rem;
+  height: 18rem;
+  line-height: 18rem;
+  text-align: center;
   border-radius: 20px;
   background-color: #fff;
-  padding: 111px 0;
-  animation: ${rotate} 1.35s 1;
+  animation: ${rotate} 1.45s 1;
 `;
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  text-align: center;
-  font-size: 4.8rem;
+  font-weight: bold;
+  font-size: 2.55rem;
 `;
 const Bg = styled.div`
   position: fixed;
@@ -59,6 +60,6 @@ const Bg = styled.div`
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.65);
   animation: ${rotate} 1.35s 1;
 `;
