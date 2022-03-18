@@ -24,13 +24,16 @@ const RepoContain = (props) => {
     getSearchRepo,
     setGetSearchRepo,
   );
+
   const repoLength = useSelector((state) => state.mainPage.addRepo);
+
   const handleAddClick = (e, target) => {
     const addData = getSearchRepo.filter(
       (current) =>
         current.userID === getSearchRepo[e.target.id].userID &&
         current.repoName === getSearchRepo[e.target.id].repoName,
     );
+    console.log(repoLength);
     if (repoLength.length < 4) {
       if (repoLength.length > 0) {
         const array = repoLength.map((el) => `${el.userID}${el.repoName}`);

@@ -9,7 +9,12 @@ function AddedResult() {
   const navigate = useNavigate();
   const addRepositories = useSelector((state) => state.mainPage.addRepo);
   useEffect(() => {
-    dispatch(deleteData(JSON.parse(window.localStorage.getItem('savedRepo'))));
+    const origin = JSON.parse(window.localStorage.getItem('savedRepo'));
+    if (origin) {
+      dispatch(
+        deleteData(JSON.parse(window.localStorage.getItem('savedRepo'))),
+      );
+    }
   }, [dispatch]);
 
   const handleDltClick = (e) => {
