@@ -38,9 +38,14 @@ const RepoContain = (props) => {
           dispatch(setOverlapModal());
         } else {
           dispatch(searchAfterAdd(addData[0]));
+          window.localStorage.setItem(
+            'savedRepo',
+            JSON.stringify([...repoLength, addData[0]]),
+          );
         }
       } else {
         dispatch(searchAfterAdd(addData[0]));
+        window.localStorage.setItem('savedRepo', JSON.stringify([addData[0]]));
       }
     } else {
       dispatch(setFourModal());
