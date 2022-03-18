@@ -38,7 +38,7 @@ export default function Main() {
           <ResultBox>{isLoading ? <Spinner /> : <RepoContain />}</ResultBox>
         </LeftBox>
         <RightBox>
-          <MainTitle content="Search In Repository 😎" />
+          <MainTitle content="Saved Repositories 😎" />
           <AddedResult />
         </RightBox>
       </Container>
