@@ -5,7 +5,7 @@
 ### 📎 &nbsp; [과제링크](https://gallant-shockley-d3e212.netlify.app/)
 
 <div align="center">
-<img width="300px" src=""/>
+<img width="600px" src="https://user-images.githubusercontent.com/87487161/159151814-8d4b4ea7-cebc-4175-9eb8-a3fb832fceb6.gif"/>
 </div>
 
 <br />
